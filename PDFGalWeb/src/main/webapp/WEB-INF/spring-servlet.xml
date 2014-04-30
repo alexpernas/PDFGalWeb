@@ -36,6 +36,23 @@
             	<value>/WEB-INF/tiles/tiles.xml</value>
         	</list>
     	</property>
-</bean>
+	</bean>
+	
+	<!-- MessageSource and LocaleResolver -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="basenames">
+			<list>
+				<value>classpath:bundles/index</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="gl" />
+	</bean>
 			
 </beans>
