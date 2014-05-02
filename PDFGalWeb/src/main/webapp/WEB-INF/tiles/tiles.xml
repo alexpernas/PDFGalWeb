@@ -6,7 +6,7 @@
 <tiles-definitions>
 
   <definition name="home" template="/WEB-INF/jsp/common/template.jsp">
-<!--     <put-attribute name="title" value="BUNDLEQUESEXATAL" /> -->
+    <put-attribute name="title" value="index.title" />
 <!--     <put-attribute name="header" value="/WEB-INF/views/header.jspx" /> -->
 <!--     <put-attribute name="menu" value="/WEB-INF/views/menu.jspx" /> -->
 <!--     <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" /> -->
