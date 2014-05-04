@@ -3,7 +3,7 @@
 body {
 	width: 900px;
 	margin: 0px auto;
-	background-color: #CEE3F6;
+	background-color: #2E2E2E;
 }
 
 #banner{
@@ -22,7 +22,7 @@ body {
 
 #menu{
 	background-color: grey;
-	width: 150px;
+	width: 200px;
 	float: left;
 }
 
@@ -33,7 +33,7 @@ body {
 
 #content{
 	background-color: white;
-	width: 748px;
+	width: 698px;
 	float: left;
 	border-style: solid;
 	border-width: 1px;
