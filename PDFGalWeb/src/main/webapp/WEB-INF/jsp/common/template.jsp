@@ -7,13 +7,30 @@
 <html>
 	<head>
 		<!-- Icon -->
-		<link rel="shortcut icon" href="${pageContext.servletContext.contextPath}/WEB-INF/imaes/flavicon.ico" type="image/x-icon" />
-		<link rel="icon" href="${pageContext.servletContext.contextPath}/WEB-INF/imaes/favicon.ico" type="image/x-icon" />
-		<!-- TODO Non funciona o do icono -->
+		<link href="<c:url value="/resources/favicon.ico" />" rel="shortcut icon">
+		<link href="<c:url value="/resources/favicon.ico" />" rel="icon">
+		
 		<!-- CSS styles -->
-		<!-- TODO Non carga ben css, probar con c:url -->
-		<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/WEB-INF/css/styles.css" type="text/css">
+		<link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<!-- ********* -->
+		<!-- BOOTSTRAP -->
+		<!-- ********* -->
+		
+		<!-- Latest compiled and minified CSS -->
+<%-- 		<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet"> --%>
+
+		<!-- Optional theme -->
+<%-- 		<link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css" />" rel="stylesheet"> --%>
+
+		<!-- Latest compiled and minified JavaScript -->
+<!-- 		<script src="/resources/bootstrap/js/bootstrap.min.js"></script> -->
+		
+		<!-- JQUERY 1.11.1 -->
+<!-- 		<script src="/resources/js/jquery/jquery-1.11.1.js"></script> -->
+		
 		
 		<c:set var="titleLabel">
 			<tiles:getAsString name="title"/>
@@ -27,39 +44,21 @@
 		<div id="banner">
             <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
         </div>
+        
+        <div id="menu">
+            <%@ include file="/WEB-INF/jsp/common/menu.jsp" %>
+        </div>
+        
+        <div id="content">
+        	<tiles:insertAttribute name="content" />
+        </div>
+        
+        <div id="footer">
+            <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
+        </div>
 	</body>
 
 
 
 
 </html>
-
-
-
-<!-- <html> -->
-<!--   <head> -->
-<%--     <title><tiles:getAsString name="title"/></title> --%>
-<!--   </head> -->
-<!--   <body> -->
-<!--         <table> -->
-<!--       <tr> -->
-<!--         <td colspan="2"> -->
-<%--           <tiles:insertAttribute name="header" /> --%>
-<!--         </td> -->
-<!--       </tr> -->
-<!--       <tr> -->
-<!--         <td> -->
-<%--           <tiles:insertAttribute name="menu" /> --%>
-<!--         </td> -->
-<!--         <td> -->
-<%--           <tiles:insertAttribute name="body" /> --%>
-<!--         </td> -->
-<!--       </tr> -->
-<!--       <tr> -->
-<!--         <td colspan="2"> -->
-<%--           <tiles:insertAttribute name="footer" /> --%>
-<!--         </td> -->
-<!--       </tr> -->
-<!--     </table> -->
-<!--   </body> -->
-<!-- </html> -->
