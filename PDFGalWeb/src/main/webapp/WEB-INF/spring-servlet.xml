@@ -19,7 +19,13 @@
 	default-lazy-init="false">
     
     <!-- Controllers -->
+	<context:component-scan base-package="org.pdfgal.pdfgal.pdfgal.impl"/>
 	<context:component-scan base-package="org.pdfgal.pdfgalweb.controllers"/>
+	<context:component-scan base-package="org.pdfgal.pdfgalweb.utils.impl"/>
+	
+	<!-- Controllers for PDFGal library -->
+	<context:component-scan base-package="org.pdfgal.pdfgal.pdfgal.impl"/>
+	<context:component-scan base-package="org.pdfgal.pdfgal.utils"/>
 	
 	<mvc:annotation-driven/>
 
@@ -47,6 +53,10 @@
 				<value>classpath:bundles/common/common</value>
 				<value>classpath:bundles/index/index</value>
 				<value>classpath:bundles/menu/menu</value>
+				<value>classpath:bundles/merge/merge</value>
+				<value>classpath:bundles/protect/protect</value>
+				<value>classpath:bundles/split/split</value>
+				<value>classpath:bundles/unprotect/unprotect</value>
 			</list>
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />
@@ -56,5 +66,8 @@
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="gl" />
 	</bean>
+	
+	<!-- MultipartResolver -->
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 			
 </beans>

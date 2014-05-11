@@ -10,4 +10,24 @@
     <put-attribute name="content" value="/WEB-INF/jsp/home/home.jsp" />
   </definition>
 
+  <definition name="merge" template="/WEB-INF/jsp/common/template.jsp">
+    <put-attribute name="title" value="merge.title" />
+    <put-attribute name="content" value="/WEB-INF/jsp/merge/merge.jsp" />
+  </definition>
+
+  <definition name="split" template="/WEB-INF/jsp/common/template.jsp">
+    <put-attribute name="title" value="split.title" />
+    <put-attribute name="content" value="/WEB-INF/jsp/split/split.jsp" />
+  </definition>
+
+  <definition name="protect" template="/WEB-INF/jsp/common/template.jsp">
+    <put-attribute name="title" value="protect.title" />
+    <put-attribute name="content" value="/WEB-INF/jsp/protect/protect.jsp" />
+  </definition>
+
+  <definition name="unprotect" template="/WEB-INF/jsp/common/template.jsp">
+    <put-attribute name="title" value="unprotect.title" />
+    <put-attribute name="content" value="/WEB-INF/jsp/unprotect/unprotect.jsp" />
+  </definition>
+
 </tiles-definitions>
