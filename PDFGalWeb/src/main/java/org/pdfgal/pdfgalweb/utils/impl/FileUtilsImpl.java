@@ -2,8 +2,13 @@ package org.pdfgal.pdfgalweb.utils.impl;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.springframework.stereotype.Component;
@@ -25,6 +30,18 @@ public class FileUtilsImpl implements FileUtils {
 
 		final String random = RandomStringUtils.randomAlphanumeric(20);
 		return random + originalName;
+
+	}
+
+	@Override
+	public void prepareFileDownload(final HttpServletResponse response,
+			final String uri, final String fileName) throws IOException {
+
+		final FileInputStream fileInputStream = new FileInputStream(uri);
+		response.setContentType("application/pdf");
+		response.setHeader("Content-Disposition", "attachment; filename="
+				+ fileName);
+		IOUtils.copyLarge(fileInputStream, response.getOutputStream());
 
 	}
 
