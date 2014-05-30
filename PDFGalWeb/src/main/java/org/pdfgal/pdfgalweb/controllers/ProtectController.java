@@ -40,9 +40,12 @@ public class ProtectController extends BaseController {
 	public final ModelAndView protect(
 			@RequestParam("file") final MultipartFile file,
 			@RequestParam("password") final String password,
+			@RequestParam("repeatedPassword") final String repeatedPassword,
 			final HttpServletResponse response) {
 
-		if (!file.isEmpty() && StringUtils.isNotBlank(password)) {
+		if (!file.isEmpty() && StringUtils.isNotBlank(password)
+				&& StringUtils.isNotBlank(repeatedPassword)
+				&& password.equals(repeatedPassword)) {
 			try {
 				final String originalName = file.getOriginalFilename();
 				final String inputUri = this.fileUtils.saveFile(file);
@@ -67,7 +70,8 @@ public class ProtectController extends BaseController {
 			}
 		} else {
 			// TODO Facer que amose mensaxe de erro en caso de que non se
-			// cargara ningún ficheiro.
+			// cargara ningún ficheiro, ou algún contrasinal é baleiro, ou algún
+			// contrasinal non existe.
 		}
 
 		return null;
