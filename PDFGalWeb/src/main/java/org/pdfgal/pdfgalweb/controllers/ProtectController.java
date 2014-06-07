@@ -65,13 +65,15 @@ public class ProtectController extends BaseController {
 
 			} catch (final Exception e) {
 				// TODO Facer que amose mensaxe de erro en caso de que non se
-				// cargara ningún ficheiro, ou non se protexera, ou o que sexa
+				// cargara ningï¿½n ficheiro, ou non se protexera, ou o que sexa
 				// (un catch para cada cousa) e incluir no log.
+				return this.getInicioPage();
 			}
 		} else {
 			// TODO Facer que amose mensaxe de erro en caso de que non se
-			// cargara ningún ficheiro, ou algún contrasinal é baleiro, ou algún
+			// cargara ningï¿½n ficheiro, ou algï¿½n contrasinal ï¿½ baleiro, ou algï¿½n
 			// contrasinal non existe.
+			return this.getInicioPage();
 		}
 
 		return null;
