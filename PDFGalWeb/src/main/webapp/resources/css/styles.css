@@ -46,6 +46,11 @@ body {
 	border-width: 1px;
 }
 
+
+/* ***** */
+/* LINKS */
+/* ***** */
+
 a:link { /* No visited link */
 	text-decoration: none;
 	color: black;
