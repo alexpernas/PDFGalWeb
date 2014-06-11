@@ -16,28 +16,28 @@
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br /> <br />
+	<br />
 
 <div style="margin-left:60px;">
 	<spring:message code="split.description.mode1"
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br /> <br />
+	<br />
 
 <div style="margin-left:200px;">
 	<spring:message code="split.description.mode1.good"
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br /> <br />
+	<br />
 
 <div style="margin-left:200px;">
 	<spring:message code="split.description.mode1.bad"
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br /> <br />
+	<br />
 
 <div style="margin-left:60px;">
 	<spring:message code="split.description.mode2"
