@@ -18,18 +18,18 @@
 
 <br />
 
-<form:form method="POST" enctype="multipart/form-data"
-	action="${uploadFile}">
+<form:form method="POST" commandName="unProtectForm"
+	enctype="multipart/form-data">
 
 	<spring:message code="unprotect.file.label" />
-	<input type="file" name="file">
+	<form:input type="file" path="file" />
 
 	<br />
 	<br />
 
 	<spring:message code="unprotect.password" />
-	<input type="password" name="password">
-	
+	<form:input type="password" path="password" />
+
 
 	<br />
 	<br />

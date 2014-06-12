@@ -16,32 +16,46 @@
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br />
+<br />
 
-<div style="margin-left:60px;">
+<div style="margin-left: 60px;">
 	<spring:message code="split.description.mode1"
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br />
+<br />
 
-<div style="margin-left:200px;">
+<div style="margin-left: 200px;">
 	<spring:message code="split.description.mode1.good"
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br />
+<br />
 
-<div style="margin-left:200px;">
+<div style="margin-left: 200px;">
 	<spring:message code="split.description.mode1.bad"
 		arguments="${labelButtonValue}" />
 </div>
 
-	<br />
+<br />
 
-<div style="margin-left:60px;">
+<div style="margin-left: 60px;">
 	<spring:message code="split.description.mode2"
 		arguments="${labelButtonValue}" />
 </div>
 
 <br />
+
+
+<form:form method="POST" commandName="splitForm"
+	enctype="multipart/form-data">
+
+
+	<spring:message code="protect.file.label" />
+	<form:input type="file" path="file" />
+
+	<form:input id="password" path="password" />
+
+	<input type="submit" value="${labelButtonValue}">
+
+</form:form>

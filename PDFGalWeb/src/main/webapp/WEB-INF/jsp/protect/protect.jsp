@@ -18,21 +18,21 @@
 
 <br />
 
-<form:form method="POST" enctype="multipart/form-data"
-	action="${uploadFile}">
+<form:form method="POST" commandName="protectForm"
+	enctype="multipart/form-data">
 
 	<spring:message code="protect.file.label" />
-	<input type="file" name="file">
+	<form:input type="file" path="file" />
 
 	<br />
 	<br />
 
 	<spring:message code="protect.password" />
-	<input type="password" name="password">
+	<form:input type="password" path="password" />
 	<br />
 	<spring:message code="protect.repeat.password" />
-	<input type="password" name="repeatedPassword">
-	
+	<form:input type="password" path="repeatedPassword" />
+
 
 	<br />
 	<br />
