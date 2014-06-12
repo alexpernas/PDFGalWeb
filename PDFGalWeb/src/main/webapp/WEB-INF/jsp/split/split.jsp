@@ -51,10 +51,16 @@
 	enctype="multipart/form-data">
 
 
-	<spring:message code="protect.file.label" />
+	<spring:message code="split.file.label" />
 	<form:input type="file" path="file" />
 
-	<form:input id="password" path="password" />
+	<br />
+	<br />
+	
+	<form:radiobuttons path="splitMode" />
+
+	<br />
+	<br />
 
 	<input type="submit" value="${labelButtonValue}">
 

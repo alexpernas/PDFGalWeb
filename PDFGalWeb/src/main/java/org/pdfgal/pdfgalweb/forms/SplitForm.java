@@ -2,6 +2,7 @@ package org.pdfgal.pdfgalweb.forms;
 
 import java.io.Serializable;
 
+import org.pdfgal.pdfgalweb.model.enumerated.SplitMode;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SplitForm implements Serializable {
@@ -10,7 +11,7 @@ public class SplitForm implements Serializable {
 
 	private MultipartFile file;
 
-	private String password;
+	private SplitMode splitMode;
 
 	/**
 	 * @return the file
@@ -27,17 +28,17 @@ public class SplitForm implements Serializable {
 	}
 
 	/**
-	 * @return the password
+	 * @return the splitMode
 	 */
-	public String getPassword() {
-		return this.password;
+	public SplitMode getSplitMode() {
+		return this.splitMode;
 	}
 
 	/**
-	 * @param password the password to set
+	 * @param splitMode the splitMode to set
 	 */
-	public void setPassword(final String password) {
-		this.password = password;
+	public void setSplitMode(final SplitMode splitMode) {
+		this.splitMode = splitMode;
 	}
 
 }
