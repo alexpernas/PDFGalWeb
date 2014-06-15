@@ -56,8 +56,14 @@
 
 	<br />
 	<br />
-	
-	<form:radiobuttons path="splitMode" />
+
+	<form:select path="splitMode">
+		<c:forEach var="item" items="${splitModes}">
+			<form:option value="${item}">
+				<spring:message code="${item}" />
+			</form:option>
+		</c:forEach>
+	</form:select>
 
 	<br />
 	<br />

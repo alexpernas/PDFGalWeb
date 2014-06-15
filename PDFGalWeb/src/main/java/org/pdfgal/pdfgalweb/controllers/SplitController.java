@@ -3,6 +3,7 @@ package org.pdfgal.pdfgalweb.controllers;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pdfgal.pdfgalweb.forms.SplitForm;
+import org.pdfgal.pdfgalweb.model.enumerated.SplitMode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +27,13 @@ public class SplitController extends BaseController {
 	public final ModelAndView getInicioPage() {
 		final ModelAndView mav = new ModelAndView("split");
 		mav.addObject(SPLIT_FORM, new SplitForm());
+		mav.addObject("splitModes", SplitMode.values());
 		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final ModelAndView protect(@ModelAttribute(SPLIT_FORM) final SplitForm splitForm,
+	public final ModelAndView protect(
+			@ModelAttribute(SPLIT_FORM) final SplitForm splitForm,
 			final HttpServletResponse response) {
 		return null;
 	}
