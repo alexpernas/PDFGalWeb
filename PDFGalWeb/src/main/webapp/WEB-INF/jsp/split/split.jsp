@@ -57,6 +57,7 @@
 	<br />
 	<br />
 
+	<spring:message code="split.select.label" />
 	<form:select path="splitMode">
 		<c:forEach var="item" items="${splitModes}">
 			<form:option value="${item}">
@@ -64,6 +65,12 @@
 			</form:option>
 		</c:forEach>
 	</form:select>
+
+	<br />
+	<br />
+	
+	<spring:message code="split.pages.label" />
+	<form:input path="pages"/>
 
 	<br />
 	<br />

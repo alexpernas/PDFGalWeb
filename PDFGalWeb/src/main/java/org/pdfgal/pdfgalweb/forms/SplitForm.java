@@ -13,6 +13,8 @@ public class SplitForm implements Serializable {
 
 	private SplitMode splitMode;
 
+	private String pages;
+
 	/**
 	 * @return the file
 	 */
@@ -21,7 +23,8 @@ public class SplitForm implements Serializable {
 	}
 
 	/**
-	 * @param file the file to set
+	 * @param file
+	 *            the file to set
 	 */
 	public void setFile(final MultipartFile file) {
 		this.file = file;
@@ -35,10 +38,19 @@ public class SplitForm implements Serializable {
 	}
 
 	/**
-	 * @param splitMode the splitMode to set
+	 * @param splitMode
+	 *            the splitMode to set
 	 */
 	public void setSplitMode(final SplitMode splitMode) {
 		this.splitMode = splitMode;
+	}
+
+	public String getPages() {
+		return this.pages;
+	}
+
+	public void setPages(final String pages) {
+		this.pages = pages;
 	}
 
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,6 +43,13 @@ public class FileUtilsImpl implements FileUtils {
 		response.setHeader("Content-Disposition", "attachment; filename="
 				+ fileName);
 		IOUtils.copyLarge(fileInputStream, response.getOutputStream());
+
+	}
+
+	@Override
+	public void prepareFileDownload(final HttpServletResponse response,
+			final List<String> urisList, final String fileName) {
+		// TODO Auto-generated method stub
 
 	}
 
