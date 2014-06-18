@@ -1,5 +1,6 @@
 package org.pdfgal.pdfgalweb.utils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -51,8 +52,11 @@ public interface FileUtils {
 	 * @param response The HttpServletResponse.
 	 * @param urisList The URIs of the files to download.
 	 * @param fileName The file name of the files to download.
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	void prepareFileDownload(HttpServletResponse response, List<String> urisList, String fileName);
+	void prepareFileDownload(HttpServletResponse response, List<String> urisList, String fileName)
+			throws FileNotFoundException, IOException;
 
 	/**
 	 * Stores the {@link MultipartFile} to the system. Returns the path where

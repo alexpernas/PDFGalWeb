@@ -3,6 +3,7 @@ package org.pdfgal.pdfgalweb.utils.impl;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -13,11 +14,16 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
+import org.pdfgal.pdfgalweb.utils.ZipUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileUtilsImpl implements FileUtils {
+
+	@Autowired
+	private ZipUtils zipUtils;
 
 	@Override
 	public boolean delete(final String uri) {
@@ -66,7 +72,11 @@ public class FileUtilsImpl implements FileUtils {
 
 	@Override
 	public void prepareFileDownload(final HttpServletResponse response,
-			final List<String> urisList, final String fileName) {
+			final List<String> urisList, final String fileName) throws FileNotFoundException,
+			IOException {
+
+		this.zipUtils.zipFiles(urisList, fileName);
+
 		// TODO Auto-generated method stub
 
 	}
