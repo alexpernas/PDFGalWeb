@@ -13,6 +13,16 @@
 		<!-- CSS styles -->
 		<link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
 		
+		
+		<!-- ********** -->
+		<!-- Javascript -->
+		<!-- ********** -->
+		
+		<!-- JQUERY 1.11.1 -->
+		<script src="<c:url value="/resources/js/jquery/jquery-1.11.1.min.js" />"></script>
+		
+		
+		<!-- Charset -->
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		
 		<!-- ********* -->
@@ -27,9 +37,6 @@
 
 		<!-- Latest compiled and minified JavaScript -->
 <!-- 		<script src="/resources/bootstrap/js/bootstrap.min.js"></script> -->
-		
-		<!-- JQUERY 1.11.1 -->
-<!-- 		<script src="/resources/js/jquery/jquery-1.11.1.js"></script> -->
 		
 		
 		<c:set var="titleLabel">

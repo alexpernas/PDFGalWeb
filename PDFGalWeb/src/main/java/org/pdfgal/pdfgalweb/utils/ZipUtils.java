@@ -2,6 +2,7 @@ package org.pdfgal.pdfgalweb.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public interface ZipUtils {
@@ -17,5 +18,15 @@ public interface ZipUtils {
 	 */
 	String zipFiles(List<String> urisList, String fileName)
 			throws FileNotFoundException, IOException;
+
+	/**
+	 * Saves the files inside the parameter's ZIP. Returns the URIs where files
+	 * were saved.
+	 * 
+	 * @param inputStream
+	 * @return
+	 * @throws IOException
+	 */
+	List<String> saveFilesFromZip(InputStream inputStream) throws IOException;
 
 }

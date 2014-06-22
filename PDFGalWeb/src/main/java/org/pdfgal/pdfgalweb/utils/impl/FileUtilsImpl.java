@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.pdfgal.pdfgalweb.utils.ZipUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,5 +114,27 @@ public class FileUtilsImpl implements FileUtils {
 		}
 
 		return name;
+	}
+
+	@Override
+	public List<String> saveFile(final List<MultipartFile> files) {
+
+		final List<String> result = new ArrayList<String>();
+
+		if (CollectionUtils.isNotEmpty(files)) {
+			for (final MultipartFile file : files) {
+
+				final String path = this.saveFile(file);
+
+				if (StringUtils.isBlank(path)) {
+					this.delete(result);
+					return null;
+				}
+
+				result.add(path);
+			}
+		}
+
+		return result;
 	}
 }
