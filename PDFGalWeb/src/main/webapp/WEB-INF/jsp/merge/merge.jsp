@@ -28,13 +28,13 @@
 </script>
 
 
-<div>
+<div class="padding_left">
 	<h3>
 		<spring:message code="merge.subtitle" />
 	</h3>
 </div>
 
-<div>
+<div class="container">
 	<spring:message code="merge.description"
 		arguments="${labelButtonValue},${labelAddButtonValue}" />
 </div>
@@ -45,27 +45,37 @@
 <form:form method="POST" commandName="mergeForm"
 	enctype="multipart/form-data">
 
-	<input id="addFile" type="button" value="${labelAddButtonValue}" />
+	<div class="container">
+	
+	<div class="button button_140">
+			<a id="addFile" href="#">
+			<spring:message code="merge.button.add.value" />
+			</a>
+		</div>
 
-	<br />
-	<br />
+		<br />
+		<br />
 
-	<table id="fileTable">
-		<tr>
-			<td><input type="file" name="files[0]" /></td>
-		</tr>
-	</table>
+		<table id="fileTable">
+			<tr>
+				<td><input type="file" name="files[0]" /></td>
+			</tr>
+		</table>
 
-	<br />
-	<br />
+		<br /> <br />
 
-	<br />
-	<br />
+		<spring:message code="merge.file.name.label" />
+		<br /> <br />
+		<form:input path="fileName" />
 
-	<spring:message code="merge.file.name.label" />
-	<br />
-	<form:input path="fileName" />
+		<br /> <br />
 
-	<input type="submit" value="${labelButtonValue}">
+		<div class="button button_100">
+			<a href="#" onClick="$(this).closest('form').submit()"> <spring:message
+					code="merge.button.value" />
+			</a>
+		</div>
+
+	</div>
 
 </form:form>

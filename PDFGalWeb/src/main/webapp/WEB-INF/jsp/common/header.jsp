@@ -1,9 +1,11 @@
-<%@ include file="/WEB-INF/jsp/common/includes.jsp" %>
+<%@ include file="/WEB-INF/jsp/common/includes.jsp"%>
 
-<h1>
-	<label id="app_name">PDFGal</label>
-</h1>
+<div class="padding_left">
+	<h1>
+		<label id="app_name">PDFGal</label>
+	</h1>
+</div>
 
-<div id="app_subtitle">
+<div id="app_subtitle" class="padding_left">
 	<spring:message code="common.subtitle" />
 </div>

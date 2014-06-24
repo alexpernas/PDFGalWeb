@@ -3,54 +3,68 @@
 body {
 	width: 900px;
 	margin: 0px auto;
-	background-color: #2E2E2E;
+	background-color: white;
 }
 
-#banner{
-	background-color: grey;
-	border-style: solid;
+#banner {
+	background-color: #AFC8FF; border-style : solid;
 	border-width: 1px;
+	border-color: grey;
+	border-style: solid;
 }
 
-#app_name{
+#app_name {
 	color: white;
 }
 
-#app_subtitle{
+#app_subtitle {
 	font-style: oblique;
 }
 
-#menu{
-	background-color: grey;
+#menu {
+	background-color: #AFC8FF;
 	width: 200px;
 	float: left;
 }
 
-.menu_item{
+.menu_item {
 	border-style: solid;
 	border-width: 1px;
+	border-color: grey;
 }
 
-#content{
+.menu_item:hover {
+	background-color: #EEEEEE;
+}
+
+#content {
 	background-color: white;
 	width: 698px;
-	float: left;
-	border-style: solid;
+	float: left; border-style : solid;
 	border-width: 1px;
+	border-style: solid; border-width : 1px;
+	border-color: grey;
 }
 
-#footer{
-	background-color: grey;
+#footer {
+	background-color: #AFC8FF;
 	text-align: center;
 	border-style: solid;
 	border-width: 1px;
+	border-color: grey;
 }
 
+.container {
+	padding: 10px;
+}
+
+.padding_left {
+	padding-left: 10px;
+}
 
 /* ***** */
 /* LINKS */
 /* ***** */
-
 a:link { /* No visited link */
 	text-decoration: none;
 	color: black;
@@ -63,12 +77,37 @@ a:visited { /* Visited link  */
 
 a:active { /* Active link */
 	text-decoration: none;
-	color :black;
+	color: black;
 	background: #EEEEEE
 }
 
-a:hover { /* Mouse over link */
-	text-decoration: none;
-	color: black;
-	background: #EEEEEE
+/* ******* */
+/* BUTTONS */
+/* ******* */
+
+.button {
+	background: #AFC8FF;
+	text-align: center;
+	border-style: solid;
+	border-width: 1px;
+	border-color: grey;
+	font-weight: bold;
+	height: 23px;
+}
+
+.button:hover {
+	background: #EEEEEE;
+}
+
+.button:active {
+	position: relative;
+	top: 1px;
+}
+
+.button_100 {
+	width: 100px;
+}
+
+.button_140 {
+	width: 140px;
 }
