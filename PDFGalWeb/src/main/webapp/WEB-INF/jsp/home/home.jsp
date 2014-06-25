@@ -3,5 +3,13 @@
 <spring:url value="/home" var="execute" />
 
 <div class="container">
-<spring:message code="index.description" />
+
+	<div class="horizontal_50">
+		<img src="<c:url value="/resources/images/pdf_image.png" />" />
+	</div>
+
+	<div class="horizontal_50">
+		<spring:message code="index.description" />
+	</div>
+
 </div>

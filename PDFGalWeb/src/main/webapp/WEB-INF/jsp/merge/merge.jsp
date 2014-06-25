@@ -5,6 +5,7 @@
 <!-- Strings to use as values -->
 <spring:message code="merge.button.add.value" var="labelAddButtonValue" />
 <spring:message code="merge.button.value" var="labelButtonValue" />
+<spring:message code="merge.file.name.placeholder" var="labelPlaceHolder" />
 
 
 <script type="text/javascript">
@@ -39,8 +40,6 @@
 		arguments="${labelButtonValue},${labelAddButtonValue}" />
 </div>
 
-<br />
-
 
 <form:form method="POST" commandName="mergeForm"
 	enctype="multipart/form-data">
@@ -54,7 +53,6 @@
 		</div>
 
 		<br />
-		<br />
 
 		<table id="fileTable">
 			<tr>
@@ -62,11 +60,10 @@
 			</tr>
 		</table>
 
-		<br /> <br />
+		<br />
 
 		<spring:message code="merge.file.name.label" />
-		<br /> <br />
-		<form:input path="fileName" />
+		<form:input path="fileName" class="input" placeholder="${labelPlaceHolder}" />
 
 		<br /> <br />
 

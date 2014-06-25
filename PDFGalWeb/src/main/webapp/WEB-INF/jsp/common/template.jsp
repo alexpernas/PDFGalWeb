@@ -6,6 +6,20 @@
 
 <html>
 	<head>
+		
+		<!-- ********* -->
+		<!-- BOOTSTRAP -->
+		<!-- ********* -->
+		
+		<!-- Latest compiled and minified CSS -->
+<%-- 		<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet"> --%>
+
+		<!-- Optional theme -->
+<%-- 		<link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css" />" rel="stylesheet"> --%>
+
+		<!-- Latest compiled and minified JavaScript -->
+<!-- 		<script src="/resources/bootstrap/js/bootstrap.min.js"></script> -->
+		
 		<!-- Icon -->
 		<link href="<c:url value="/resources/favicon.ico" />" rel="shortcut icon">
 		<link href="<c:url value="/resources/favicon.ico" />" rel="icon">
@@ -24,19 +38,6 @@
 		
 		<!-- Charset -->
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
-		<!-- ********* -->
-		<!-- BOOTSTRAP -->
-		<!-- ********* -->
-		
-		<!-- Latest compiled and minified CSS -->
-<%-- 		<link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet"> --%>
-
-		<!-- Optional theme -->
-<%-- 		<link href="<c:url value="/resources/bootstrap/css/bootstrap-theme.min.css" />" rel="stylesheet"> --%>
-
-		<!-- Latest compiled and minified JavaScript -->
-<!-- 		<script src="/resources/bootstrap/js/bootstrap.min.js"></script> -->
 		
 		
 		<c:set var="titleLabel">
