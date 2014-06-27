@@ -4,6 +4,7 @@
 
 <!-- Strings to use as values -->
 <spring:message code="split.button.value" var="labelButtonValue" />
+<spring:message code="split.pages.placeholder" var="labelPlaceHolder" />
 
 <div class="padding_left">
 	<h3>
@@ -16,32 +17,31 @@
 		arguments="${labelButtonValue}" />
 </div>
 
-<br />
-
 <div class="container">
-	<div style="margin-left: 60px;">
-		<spring:message code="split.description.mode1"
+
+	<h5>
+		<spring:message code="NUMBER_OF_PAGES" />
+	</h5>
+
+	<spring:message code="split.description.total"
+		arguments="${labelButtonValue}" />
+
+	<h5>
+		<spring:message code="CONCRETE_PAGES_TO_SPLIT" />
+	</h5>
+
+	<spring:message code="split.description.concrete"
+		arguments="${labelButtonValue}" />
+
+	<br /> <br />
+
+	<div class="padding_left_50">
+		<spring:message code="split.description.concrete.good"
 			arguments="${labelButtonValue}" />
-	</div>
 
-	<br />
+		<br /> <br />
 
-	<div style="margin-left: 200px;">
-		<spring:message code="split.description.mode1.good"
-			arguments="${labelButtonValue}" />
-	</div>
-
-	<br />
-
-	<div style="margin-left: 200px;">
-		<spring:message code="split.description.mode1.bad"
-			arguments="${labelButtonValue}" />
-	</div>
-
-	<br />
-
-	<div style="margin-left: 60px;">
-		<spring:message code="split.description.mode2"
+		<spring:message code="split.description.concrete.bad"
 			arguments="${labelButtonValue}" />
 	</div>
 </div>
@@ -71,7 +71,7 @@
 		<br /> <br />
 
 		<spring:message code="split.pages.label" />
-		<form:input path="pages" />
+		<form:input path="pages" class="input" placeholder="${labelPlaceHolder}" />
 
 		<br /> <br />
 

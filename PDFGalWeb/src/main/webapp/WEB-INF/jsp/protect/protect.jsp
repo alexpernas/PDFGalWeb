@@ -4,6 +4,10 @@
 
 <!-- Strings to use as values -->
 <spring:message code="protect.button.value" var="labelButtonValue" />
+<spring:message code="protect.password.placeholder"
+	var="labelPasswordPlaceHolder" />
+<spring:message code="protect.repeat.password.placeholder"
+	var="labelRepeatPasswordPlaceHolder" />
 
 <div class="padding_left">
 	<h3>
@@ -16,8 +20,6 @@
 		arguments="${labelButtonValue}" />
 </div>
 
-<br />
-
 <form:form method="POST" commandName="protectForm"
 	enctype="multipart/form-data">
 
@@ -28,11 +30,22 @@
 
 		<br /> <br />
 
-		<spring:message code="protect.password" />
-		<form:input type="password" path="password" />
-		<br />
-		<spring:message code="protect.repeat.password" />
-		<form:input type="password" path="repeatedPassword" />
+		<div class="horizontal_20">
+			<spring:message code="protect.password" />
+		</div>
+
+		<form:input type="password" path="password" class="input_password"
+			placeholder="${labelPasswordPlaceHolder}" />
+
+		<br /> <br />
+
+		<div class="horizontal_20">
+			<spring:message code="protect.repeat.password" />
+		</div>
+
+		<form:input type="password" path="repeatedPassword"
+			class="input_password"
+			placeholder="${labelRepeatPasswordPlaceHolder}" />
 
 
 		<br /> <br />

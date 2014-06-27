@@ -65,10 +65,19 @@ body {
 	padding-left: 10px;
 }
 
+.padding_left_50 {
+	padding-left: 50px;
+}
+
 .horizontal_50 {
 	float: left;
 	width: 45%;
 	padding: 10px;
+}
+
+.horizontal_20 {
+	float: left;
+	width: 20%;
 }
 
 /* ***** */
@@ -95,6 +104,10 @@ a:active { /* Active link */
 /* *********** */
 .input {
 	width: 400px;
+}
+
+.input_password {
+	width: 200px;
 }
 
 /* ******* */

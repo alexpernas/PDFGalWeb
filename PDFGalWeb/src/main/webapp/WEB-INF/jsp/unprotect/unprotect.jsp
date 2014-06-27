@@ -4,6 +4,8 @@
 
 <!-- Strings to use as values -->
 <spring:message code="unprotect.button.value" var="labelButtonValue" />
+<spring:message code="unprotect.password.placeholder"
+	var="labelPlaceHolder" />
 
 <div class="padding_left">
 	<h3>
@@ -16,8 +18,6 @@
 		arguments="${labelButtonValue}" />
 </div>
 
-<br />
-
 <form:form method="POST" commandName="unProtectForm"
 	enctype="multipart/form-data">
 
@@ -29,7 +29,8 @@
 		<br /> <br />
 
 		<spring:message code="unprotect.password" />
-		<form:input type="password" path="password" />
+		<form:input type="password" class="input_password"
+			placeholder="${labelPlaceHolder}" path="password" />
 
 
 		<br /> <br />
