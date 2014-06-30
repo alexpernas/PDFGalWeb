@@ -23,23 +23,17 @@
 
 	<div class="container">
 
-		<spring:message code="unprotect.file.label" />
-		<form:input type="file" path="file" />
+		<j:input type="file" path="file" code="unprotect.file.label" />
 
 		<br /> <br />
 
-		<spring:message code="unprotect.password" />
-		<form:input type="password" class="input_password"
-			placeholder="${labelPlaceHolder}" path="password" />
+		<j:input type="password" path="password" code="unprotect.password"
+			placeHolder="${labelPlaceHolder}" styleClass="input_password" />
 
 
 		<br /> <br />
 
-		<div class="button button_100">
-			<a href="#" onClick="$(this).closest('form').submit()"> <spring:message
-					code="unprotect.button.value" />
-			</a>
-		</div>
+		<j:submitButton code="unprotect.button.value" />
 
 	</div>
 

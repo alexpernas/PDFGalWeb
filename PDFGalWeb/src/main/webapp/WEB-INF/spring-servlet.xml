@@ -24,6 +24,9 @@
 	<!-- Controllers for PDFGal library -->
 	<context:component-scan base-package="org.pdfgal.pdfgal.pdfgal.impl" />
 	<context:component-scan base-package="org.pdfgal.pdfgal.utils" />
+	
+	<!-- Validators -->
+	<context:component-scan base-package="org.pdfgal.pdfgalweb.validators" />
 
 	<mvc:annotation-driven />
 

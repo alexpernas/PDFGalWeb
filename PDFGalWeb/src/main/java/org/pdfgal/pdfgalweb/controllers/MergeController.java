@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -13,8 +14,12 @@ import org.pdfgal.pdfgal.pdfgal.PDFGal;
 import org.pdfgal.pdfgalweb.forms.MergeForm;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.pdfgal.pdfgalweb.utils.ZipUtils;
+import org.pdfgal.pdfgalweb.validators.MergeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,10 +38,18 @@ public class MergeController extends BaseController {
 	private FileUtils fileUtils;
 
 	@Autowired
+	private MergeValidator mergeValidator;
+
+	@Autowired
 	private PDFGal pdfGal;
 
 	@Autowired
 	private ZipUtils zipUtils;
+
+	@InitBinder
+	protected void initBinder(final WebDataBinder binder) {
+		binder.setValidator(this.mergeValidator);
+	}
 
 	/**
 	 * Start Page for merging.
@@ -52,8 +65,12 @@ public class MergeController extends BaseController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public final ModelAndView protect(
-			@ModelAttribute(MERGE_FORM) final MergeForm mergeForm,
-			final HttpServletResponse response) {
+			@ModelAttribute(MERGE_FORM) @Valid final MergeForm mergeForm,
+			final BindingResult result, final HttpServletResponse response) {
+
+		if (result.hasErrors()) {
+			return new ModelAndView("merge");
+		}
 
 		final List<MultipartFile> files = mergeForm.getFiles();
 		final String fileName = mergeForm.getFileName();

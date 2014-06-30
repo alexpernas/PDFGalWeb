@@ -54,8 +54,7 @@
 
 	<div class="container">
 
-		<spring:message code="split.file.label" />
-		<form:input type="file" path="file" />
+		<j:input type="file" path="file" code="split.file.label" />
 
 		<br /> <br />
 
@@ -70,16 +69,12 @@
 
 		<br /> <br />
 
-		<spring:message code="split.pages.label" />
-		<form:input path="pages" class="input" placeholder="${labelPlaceHolder}" />
+		<j:input path="pages" code="split.pages.label"
+			placeHolder="${labelPlaceHolder}" styleClass="input" />
 
 		<br /> <br />
 
-		<div class="button button_100">
-			<a href="#" onClick="$(this).closest('form').submit()"> <spring:message
-					code="split.button.value" />
-			</a>
-		</div>
+		<j:submitButton code="split.button.value" />
 
 	</div>
 

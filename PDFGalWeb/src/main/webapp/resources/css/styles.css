@@ -43,6 +43,10 @@ body {
 	padding-right: 10px;
 }
 
+.error{
+	color: red;
+}
+
 #content {
 	background-color: white;
 	width: 698px;

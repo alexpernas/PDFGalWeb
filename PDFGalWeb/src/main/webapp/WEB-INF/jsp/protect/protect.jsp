@@ -25,36 +25,25 @@
 
 	<div class="container">
 
-		<spring:message code="protect.file.label" />
-		<form:input type="file" path="file" />
+		<j:input type="file" path="file" code="protect.file.label" />
 
 		<br /> <br />
 
-		<div class="horizontal_20">
-			<spring:message code="protect.password" />
-		</div>
+		<j:input type="password" path="password" code="protect.password"
+			placeHolder="${labelPasswordPlaceHolder}" styleClass="input_password"
+			labelClass="horizontal_20" />
 
-		<form:input type="password" path="password" class="input_password"
-			placeholder="${labelPasswordPlaceHolder}" />
+		<br />
 
-		<br /> <br />
-
-		<div class="horizontal_20">
-			<spring:message code="protect.repeat.password" />
-		</div>
-
-		<form:input type="password" path="repeatedPassword"
-			class="input_password"
-			placeholder="${labelRepeatPasswordPlaceHolder}" />
+		<j:input type="password" path="repeatedPassword"
+			code="protect.repeat.password"
+			placeHolder="${labelRepeatPasswordPlaceHolder}"
+			styleClass="input_password" labelClass="horizontal_20" />
 
 
 		<br /> <br />
 
-		<div class="button button_100">
-			<a href="#" onClick="$(this).closest('form').submit()"> <spring:message
-					code="protect.button.value" />
-			</a>
-		</div>
+		<j:submitButton code="protect.button.value" />
 
 	</div>
 

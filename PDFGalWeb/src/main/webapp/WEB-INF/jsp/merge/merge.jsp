@@ -5,7 +5,8 @@
 <!-- Strings to use as values -->
 <spring:message code="merge.button.add.value" var="labelAddButtonValue" />
 <spring:message code="merge.button.value" var="labelButtonValue" />
-<spring:message code="merge.file.name.placeholder" var="labelPlaceHolder" />
+<spring:message code="merge.file.name.placeholder"
+	var="labelPlaceHolder" />
 
 
 <script type="text/javascript">
@@ -45,10 +46,10 @@
 	enctype="multipart/form-data">
 
 	<div class="container">
-	
-	<div class="button button_140">
-			<a id="addFile" href="#">
-			<spring:message code="merge.button.add.value" />
+
+		<div class="button button_140">
+			<a id="addFile" href="#"> <spring:message
+					code="merge.button.add.value" />
 			</a>
 		</div>
 
@@ -59,19 +60,17 @@
 				<td><input type="file" name="files[0]" /></td>
 			</tr>
 		</table>
+		<br />
+		<form:errors path="files" class="error" />
 
 		<br />
 
-		<spring:message code="merge.file.name.label" />
-		<form:input path="fileName" class="input" placeholder="${labelPlaceHolder}" />
+		<j:input path="fileName" code="merge.file.name.label"
+			placeHolder="${labelPlaceHolder}" styleClass="input" />
 
 		<br /> <br />
 
-		<div class="button button_100">
-			<a href="#" onClick="$(this).closest('form').submit()"> <spring:message
-					code="merge.button.value" />
-			</a>
-		</div>
+		<j:submitButton code="merge.button.value" />
 
 	</div>
 
