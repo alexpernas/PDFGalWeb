@@ -60,10 +60,9 @@
 				<td><input type="file" name="files[0]" /></td>
 			</tr>
 		</table>
-		<br />
 		<form:errors path="files" class="error" />
 
-		<br />
+		<br /> <br />
 
 		<j:input path="fileName" code="merge.file.name.label"
 			placeHolder="${labelPlaceHolder}" styleClass="input" />

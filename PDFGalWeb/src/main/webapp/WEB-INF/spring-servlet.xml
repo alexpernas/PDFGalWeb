@@ -27,6 +27,7 @@
 	
 	<!-- Validators -->
 	<context:component-scan base-package="org.pdfgal.pdfgalweb.validators" />
+	<context:component-scan base-package="org.pdfgal.pdfgalweb.validators.utils.impl" />
 
 	<mvc:annotation-driven />
 
