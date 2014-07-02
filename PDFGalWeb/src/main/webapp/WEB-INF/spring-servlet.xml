@@ -17,14 +17,19 @@
 	default-lazy-init="false">
 
 	<!-- Controllers -->
-	<context:component-scan base-package="org.pdfgal.pdfgal.pdfgal.impl" />
 	<context:component-scan base-package="org.pdfgal.pdfgalweb.controllers" />
+	
+	<!-- Utils -->
 	<context:component-scan base-package="org.pdfgal.pdfgalweb.utils.impl" />
+	
+	<!-- Services -->
+	<context:component-scan base-package="org.pdfgal.pdfgalweb.services.impl" />
 
 	<!-- Controllers for PDFGal library -->
 	<context:component-scan base-package="org.pdfgal.pdfgal.pdfgal.impl" />
-	<context:component-scan base-package="org.pdfgal.pdfgal.utils" />
-	
+	<context:component-scan base-package="org.pdfgal.pdfgal.utils.impl" />
+	<context:component-scan base-package="org.pdfgal.pdfgal.validator.impl" />
+
 	<!-- Validators -->
 	<context:component-scan base-package="org.pdfgal.pdfgalweb.validators" />
 	<context:component-scan base-package="org.pdfgal.pdfgalweb.validators.utils.impl" />

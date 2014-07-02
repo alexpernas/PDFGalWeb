@@ -124,14 +124,17 @@ public class FileUtilsImpl implements FileUtils {
 		if (CollectionUtils.isNotEmpty(files)) {
 			for (final MultipartFile file : files) {
 
-				final String path = this.saveFile(file);
+				if (file.getSize() > 0) {
 
-				if (StringUtils.isBlank(path)) {
-					this.delete(result);
-					return null;
+					final String path = this.saveFile(file);
+
+					if (StringUtils.isBlank(path)) {
+						this.delete(result);
+						return null;
+					}
+
+					result.add(path);
 				}
-
-				result.add(path);
 			}
 		}
 
