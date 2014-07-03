@@ -25,4 +25,15 @@ public interface ValidatorUtils {
 	 */
 	public PDFEncryptionType validatePDF(MultipartFile file);
 
+	/**
+	 * This method validates a file, it returns a {@link PDFEncryptionType}
+	 * indicating if the file is not a PDF, if it is an encrypted PDF or if it
+	 * is not an encrypted PDF. Parameter represents the URI where file is
+	 * stored.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public PDFEncryptionType validatePDF(String uri);
+
 }

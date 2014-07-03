@@ -1,10 +1,15 @@
 package org.pdfgal.pdfgalweb.validators;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.pdfgal.pdfgal.validator.PDFGalValidator;
 import org.pdfgal.pdfgalweb.forms.MergeForm;
 import org.pdfgal.pdfgalweb.model.enumerated.PDFEncryptionType;
+import org.pdfgal.pdfgalweb.utils.FileUtils;
+import org.pdfgal.pdfgalweb.utils.ZipUtils;
 import org.pdfgal.pdfgalweb.validators.utils.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +22,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class MergeValidator implements Validator {
 
 	@Autowired
+	private FileUtils fileUtils;
+
+	@Autowired
+	private PDFGalValidator pdfGalValidator;
+
+	@Autowired
 	private ValidatorUtils validatorUtils;
+
+	@Autowired
+	private ZipUtils zipUtils;
 
 	@Override
 	public boolean supports(final Class<?> clazz) {
@@ -36,22 +50,52 @@ public class MergeValidator implements Validator {
 			errors.rejectValue("fileName", "merge.validator.file.name.invalid");
 		}
 
+		// Uploaded files validator
 		final List<MultipartFile> files = mergeForm.getFiles();
 
 		if (this.isEmpty(files)) {
+			// There are no files uploaded
 			errors.rejectValue("files", "merge.validator.files.required");
 
 		} else if (files.size() == 1) {
+			// There is only one file uploaded
 			final MultipartFile file = files.get(0);
 			if (!"application/zip".equals(file.getContentType())) {
+				// In case the file is not ZIP we show error, file must be a ZIP
 				errors.rejectValue("files",
 						"merge.validator.files.incorrect.zip");
 
 			} else {
-				// TODO
+				// If file is ZIP, every file inside must be PDF
+				List<String> urisList = new ArrayList<String>();
+
+				try {
+					urisList = this.zipUtils.saveFilesFromZip(file
+							.getInputStream());
+
+					for (final String uri : urisList) {
+						if (!this.pdfGalValidator.isPDF(uri)) {
+							errors.rejectValue("files",
+									"merge.validator.files.incorrect.zip.pdf");
+							break;
+						}
+						if (this.pdfGalValidator.isEncrypted(uri)) {
+							errors.rejectValue("files",
+									"merge.validator.files.incorrect.zip.encrypted");
+							break;
+						}
+					}
+
+				} catch (final IOException e) {
+					errors.rejectValue("files",
+							"merge.validator.files.incorrect.zip");
+				} finally {
+					this.fileUtils.delete(urisList);
+				}
 			}
 
 		} else {
+			// There are more than one file uploaded
 			final PDFEncryptionType validation = this.validatePDF(files);
 			if (PDFEncryptionType.NON_PDF.equals(validation)) {
 				errors.rejectValue("files",

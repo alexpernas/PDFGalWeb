@@ -9,6 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface MergeService {
 
 	public void merge(List<MultipartFile> files, String fileName,
-			HttpServletResponse response);
+			HttpServletResponse response) throws Exception;
 
 }

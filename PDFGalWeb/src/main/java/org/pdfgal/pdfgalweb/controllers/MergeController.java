@@ -11,6 +11,7 @@ import org.pdfgal.pdfgalweb.validators.MergeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -62,7 +63,12 @@ public class MergeController extends BaseController {
 		final List<MultipartFile> files = mergeForm.getFiles();
 		final String fileName = mergeForm.getFileName();
 
-		this.mergeService.merge(files, fileName, response);
+		try {
+			this.mergeService.merge(files, fileName, response);
+		} catch (final Exception e) {
+			result.addError(new ObjectError("fileName", "merge.validator.error"));
+			return new ModelAndView("merge");
+		}
 
 		return null;
 	}

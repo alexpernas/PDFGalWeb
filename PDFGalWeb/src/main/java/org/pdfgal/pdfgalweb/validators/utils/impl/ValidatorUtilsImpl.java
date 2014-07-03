@@ -36,9 +36,19 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 	@Override
 	public PDFEncryptionType validatePDF(final MultipartFile file) {
 
-		PDFEncryptionType result = PDFEncryptionType.NON_PDF;
-
 		final String uri = this.fileUtils.saveFile(file);
+
+		final PDFEncryptionType result = this.validatePDF(uri);
+
+		this.fileUtils.delete(uri);
+
+		return result;
+	}
+
+	@Override
+	public PDFEncryptionType validatePDF(final String uri) {
+
+		PDFEncryptionType result = PDFEncryptionType.NON_PDF;
 
 		if (this.pdfGalValidator.isPDF(uri)) {
 			if (this.pdfGalValidator.isEncrypted(uri)) {
@@ -47,8 +57,6 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 				result = PDFEncryptionType.NON_ENCRYPTED;
 			}
 		}
-
-		this.fileUtils.delete(uri);
 
 		return result;
 	}
