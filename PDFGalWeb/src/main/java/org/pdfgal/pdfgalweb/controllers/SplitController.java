@@ -45,19 +45,18 @@ public class SplitController extends BaseController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public final ModelAndView getInicioPage() {
-		final ModelAndView mav = new ModelAndView("split");
+		final ModelAndView mav = this.getModelAndView();
 		mav.addObject(SPLIT_FORM, new SplitForm());
-		mav.addObject("splitModes", SplitMode.values());
 		return mav;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final ModelAndView protect(
+	public final ModelAndView split(
 			@ModelAttribute(SPLIT_FORM) @Valid final SplitForm splitForm,
 			final BindingResult result, final HttpServletResponse response) {
 
 		if (result.hasErrors()) {
-			return this.getInicioPage();
+			return this.getModelAndView();
 		}
 
 		final MultipartFile file = splitForm.getFile();
@@ -68,9 +67,21 @@ public class SplitController extends BaseController {
 			this.splitService.split(file, splitMode, pages, response);
 		} catch (final Exception e) {
 			result.addError(new ObjectError("pages", "split.validator.error"));
-			return this.getInicioPage();
+			return this.getModelAndView();
 		}
 
 		return null;
+	}
+
+	/**
+	 * Returns a new {@link ModelAndView} por splitting page, including the
+	 * {@link SplitMode} but not the {@link SplitForm}.
+	 * 
+	 * @return
+	 */
+	private ModelAndView getModelAndView() {
+		final ModelAndView mav = new ModelAndView("split");
+		mav.addObject("splitModes", SplitMode.values());
+		return mav;
 	}
 }
