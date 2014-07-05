@@ -5,6 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * Utils interface for ZIP files.
+ * 
+ * @author Alex
+ * 
+ */
 public interface ZipUtils {
 
 	/**

@@ -7,11 +7,11 @@ import javax.validation.Valid;
 
 import org.pdfgal.pdfgalweb.forms.MergeForm;
 import org.pdfgal.pdfgalweb.services.MergeService;
+import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.MergeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +33,9 @@ public class MergeController extends BaseController {
 
 	@Autowired
 	private MergeValidator mergeValidator;
+
+	@Autowired
+	private PDFGalWebUtils pdfGalWebUtils;
 
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
@@ -66,7 +69,9 @@ public class MergeController extends BaseController {
 		try {
 			this.mergeService.merge(files, fileName, response);
 		} catch (final Exception e) {
-			result.addError(new ObjectError("fileName", "merge.validator.error"));
+			// Default error is added
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
+					MERGE_FORM, "fileName", fileName, "merge.validator.error"));
 			return new ModelAndView("merge");
 		}
 

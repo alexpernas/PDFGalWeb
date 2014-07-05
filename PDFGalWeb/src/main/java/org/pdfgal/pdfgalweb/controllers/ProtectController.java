@@ -1,14 +1,11 @@
 package org.pdfgal.pdfgalweb.controllers;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.pdfbox.exceptions.COSVisitorException;
-import org.apache.pdfbox.pdmodel.encryption.BadSecurityHandlerException;
 import org.pdfgal.pdfgalweb.forms.ProtectForm;
 import org.pdfgal.pdfgalweb.services.ProtectService;
+import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.ProtectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +32,9 @@ public class ProtectController extends BaseController {
 	@Autowired
 	private ProtectValidator protectValidator;
 
+	@Autowired
+	private PDFGalWebUtils pdfGalWebUtils;
+
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
 		binder.setValidator(this.protectValidator);
@@ -57,6 +57,10 @@ public class ProtectController extends BaseController {
 			@ModelAttribute(PROTECT_FORM) @Valid final ProtectForm protectForm,
 			final BindingResult result, final HttpServletResponse response) {
 
+		if (result.hasErrors()) {
+			return new ModelAndView("protect");
+		}
+
 		final MultipartFile file = protectForm.getFile();
 		final String password = protectForm.getPassword();
 		final String repeatedPassword = protectForm.getRepeatedPassword();
@@ -64,10 +68,12 @@ public class ProtectController extends BaseController {
 		try {
 			this.protectService.protect(file, password, repeatedPassword,
 					response);
-		} catch (COSVisitorException | IOException
-				| BadSecurityHandlerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (final Exception e) {
+			// Default error is added
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
+					PROTECT_FORM, "repeatedPassword", repeatedPassword,
+					"protect.validator.error"));
+			return new ModelAndView("protect");
 		}
 
 		return null;

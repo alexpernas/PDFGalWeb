@@ -6,11 +6,11 @@ import javax.validation.Valid;
 import org.pdfgal.pdfgalweb.forms.SplitForm;
 import org.pdfgal.pdfgalweb.model.enumerated.SplitMode;
 import org.pdfgal.pdfgalweb.services.SplitService;
+import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.SplitValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,6 +32,9 @@ public class SplitController extends BaseController {
 
 	@Autowired
 	private SplitValidator splitValidator;
+
+	@Autowired
+	private PDFGalWebUtils pdfGalWebUtils;
 
 	@InitBinder
 	protected void initBinder(final WebDataBinder binder) {
@@ -66,7 +69,9 @@ public class SplitController extends BaseController {
 		try {
 			this.splitService.split(file, splitMode, pages, response);
 		} catch (final Exception e) {
-			result.addError(new ObjectError("pages", "split.validator.error"));
+			// Default error is added
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
+					SPLIT_FORM, "pages", pages, "split.validator.error"));
 			return this.getModelAndView();
 		}
 
@@ -74,7 +79,7 @@ public class SplitController extends BaseController {
 	}
 
 	/**
-	 * Returns a new {@link ModelAndView} por splitting page, including the
+	 * Returns a new {@link ModelAndView} for splitting page, including the
 	 * {@link SplitMode} but not the {@link SplitForm}.
 	 * 
 	 * @return

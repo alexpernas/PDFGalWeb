@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Utils interface for Files.
+ * 
+ * @author Alex
+ * 
+ */
 public interface FileUtils {
 
 	/**

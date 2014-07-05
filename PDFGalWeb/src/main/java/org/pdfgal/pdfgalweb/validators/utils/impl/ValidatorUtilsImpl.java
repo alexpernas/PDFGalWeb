@@ -7,6 +7,7 @@ import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.pdfgal.pdfgalweb.validators.utils.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
@@ -59,5 +60,32 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 		}
 
 		return result;
+	}
+
+	@Override
+	public void validateFile(final MultipartFile file, final Errors errors,
+			final PDFEncryptionType pdfEncryptionType) {
+
+		if (file == null || file.getSize() == 0) {
+			errors.rejectValue("file", "common.validator.file.required");
+
+		} else {
+			final PDFEncryptionType validation = this.validatePDF(file);
+			if (PDFEncryptionType.NON_PDF.equals(validation)) {
+				errors.rejectValue("file",
+						"common.validator.file.incorrect.pdf");
+
+			} else if (!validation.equals(pdfEncryptionType)) {
+
+				if (PDFEncryptionType.NON_ENCRYPTED.equals(pdfEncryptionType)) {
+					errors.rejectValue("file",
+							"common.validator.file.incorrect.encrypted.true");
+				} else if (PDFEncryptionType.ENCRYPTED
+						.equals(pdfEncryptionType)) {
+					errors.rejectValue("file",
+							"common.validator.file.incorrect.encrypted.false");
+				}
+			}
+		}
 	}
 }

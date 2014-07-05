@@ -1,6 +1,7 @@
 package org.pdfgal.pdfgalweb.validators.utils;
 
 import org.pdfgal.pdfgalweb.model.enumerated.PDFEncryptionType;
+import org.springframework.validation.Errors;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ValidatorUtils {
@@ -35,5 +36,17 @@ public interface ValidatorUtils {
 	 * @return
 	 */
 	public PDFEncryptionType validatePDF(String uri);
+
+	/**
+	 * This method validates a file, setting the corresponding error on argument
+	 * errors, there is needed the {@link PDFEncryptionType} to see if file must
+	 * be encrypted or not.
+	 * 
+	 * @param file
+	 * @param errors
+	 * @param pdfEncryptionType
+	 */
+	public void validateFile(MultipartFile file, Errors errors,
+			PDFEncryptionType pdfEncryptionType);
 
 }

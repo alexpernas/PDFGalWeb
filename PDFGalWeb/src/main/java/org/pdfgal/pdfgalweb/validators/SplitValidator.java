@@ -40,18 +40,8 @@ public class SplitValidator implements Validator {
 
 		// File validation
 		final MultipartFile file = splitForm.getFile();
-		if (file == null || file.getSize() == 0) {
-			errors.rejectValue("file", "split.validator.file.required");
-		} else {
-			final PDFEncryptionType validation = this.validatorUtils
-					.validatePDF(file);
-			if (PDFEncryptionType.NON_PDF.equals(validation)) {
-				errors.rejectValue("file", "split.validator.file.incorrect.pdf");
-			} else if (PDFEncryptionType.ENCRYPTED.equals(validation)) {
-				errors.rejectValue("file",
-						"split.validator.file.incorrect.encrypted");
-			}
-		}
+		this.validatorUtils.validateFile(file, errors,
+				PDFEncryptionType.NON_ENCRYPTED);
 
 		// SplitMode and pages validation
 		final SplitMode splitMode = splitForm.getSplitMode();
