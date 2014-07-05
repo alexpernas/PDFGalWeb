@@ -113,6 +113,7 @@ public class MergeValidator implements Validator {
 					}
 				}
 
+				this.fileUtils.delete(urisList);
 			}
 
 			fileInputStream.close();

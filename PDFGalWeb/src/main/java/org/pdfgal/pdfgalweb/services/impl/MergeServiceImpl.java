@@ -1,6 +1,7 @@
 package org.pdfgal.pdfgalweb.services.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,10 @@ public class MergeServiceImpl implements MergeService {
 
 			if (files.size() == 1) {
 				// It's a ZIP file
-				inputUris = this.zipUtils.saveFilesFromZip(files.get(0)
-						.getInputStream());
+				final InputStream fileInputStream = files.get(0)
+						.getInputStream();
+				inputUris = this.zipUtils.saveFilesFromZip(fileInputStream);
+				fileInputStream.close();
 
 			} else {
 				// They are PDF files

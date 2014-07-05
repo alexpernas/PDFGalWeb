@@ -70,7 +70,7 @@ public class FileUtilsImpl implements FileUtils {
 		response.setHeader("Content-Disposition", "attachment; filename="
 				+ fileName);
 		IOUtils.copyLarge(fileInputStream, response.getOutputStream());
-
+		fileInputStream.close();
 	}
 
 	@Override
