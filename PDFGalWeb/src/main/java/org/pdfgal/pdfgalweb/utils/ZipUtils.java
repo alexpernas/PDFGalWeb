@@ -22,7 +22,7 @@ public interface ZipUtils {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	String zipFiles(List<String> urisList, String fileName)
+	public String zipFiles(List<String> urisList, String fileName)
 			throws FileNotFoundException, IOException;
 
 	/**
@@ -33,6 +33,16 @@ public interface ZipUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	List<String> saveFilesFromZip(InputStream inputStream) throws IOException;
+	public List<String> saveFilesFromZip(InputStream inputStream)
+			throws IOException;
+
+	/**
+	 * Returns true in case inputStream represents a ZIP file, returns false
+	 * otherwise.
+	 * 
+	 * @param inputStream
+	 * @return
+	 */
+	public boolean isZip(InputStream inputStream);
 
 }

@@ -1,5 +1,7 @@
 package org.pdfgal.pdfgalweb.utils.impl;
 
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -87,6 +89,24 @@ public class ZipUtilsImpl implements ZipUtils {
 
 			zis.closeEntry();
 			zis.close();
+		}
+
+		return result;
+	}
+
+	@Override
+	public boolean isZip(final InputStream inputStream) {
+
+		boolean result = false;
+
+		try {
+			final DataInputStream dataInputStream = new DataInputStream(
+					new BufferedInputStream(inputStream));
+			final int test = dataInputStream.readInt();
+			dataInputStream.close();
+			result = (test == 0x504b0304);
+		} catch (final IOException e) {
+			result = false;
 		}
 
 		return result;

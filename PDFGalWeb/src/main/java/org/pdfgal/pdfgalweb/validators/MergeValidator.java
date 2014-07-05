@@ -1,6 +1,7 @@
 package org.pdfgal.pdfgalweb.validators;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,40 +60,7 @@ public class MergeValidator implements Validator {
 
 		} else if (files.size() == 1) {
 			// There is only one file uploaded
-			final MultipartFile file = files.get(0);
-			if (!"application/zip".equals(file.getContentType())) {
-				// In case the file is not ZIP we show error, file must be a ZIP
-				errors.rejectValue("files",
-						"merge.validator.files.incorrect.zip");
-
-			} else {
-				// If file is ZIP, every file inside must be PDF
-				List<String> urisList = new ArrayList<String>();
-
-				try {
-					urisList = this.zipUtils.saveFilesFromZip(file
-							.getInputStream());
-
-					for (final String uri : urisList) {
-						if (!this.pdfGalValidator.isPDF(uri)) {
-							errors.rejectValue("files",
-									"merge.validator.files.incorrect.zip.pdf");
-							break;
-						}
-						if (this.pdfGalValidator.isEncrypted(uri)) {
-							errors.rejectValue("files",
-									"merge.validator.files.incorrect.zip.encrypted");
-							break;
-						}
-					}
-
-				} catch (final IOException e) {
-					errors.rejectValue("files",
-							"merge.validator.files.incorrect.zip");
-				} finally {
-					this.fileUtils.delete(urisList);
-				}
-			}
+			this.validateZipFile(files.get(0), errors);
 
 		} else {
 			// There are more than one file uploaded
@@ -104,6 +72,53 @@ public class MergeValidator implements Validator {
 				errors.rejectValue("files",
 						"merge.validator.files.incorrect.encrypted");
 			}
+		}
+	}
+
+	/**
+	 * Makes the validation for a single ZIP file
+	 * 
+	 * @param file
+	 * @param errors
+	 */
+	private void validateZipFile(final MultipartFile file, final Errors errors) {
+
+		try {
+			InputStream fileInputStream = file.getInputStream();
+
+			if (!this.zipUtils.isZip(fileInputStream)) {
+				// In case the file is not ZIP we show error, file must be a
+				// ZIP
+				errors.rejectValue("files",
+						"merge.validator.files.incorrect.zip");
+
+			} else {
+				// If file is ZIP, every file inside must be PDF
+				List<String> urisList = new ArrayList<String>();
+
+				// InputStream is closed previously so we must get it again
+				fileInputStream = file.getInputStream();
+				urisList = this.zipUtils.saveFilesFromZip(fileInputStream);
+
+				for (final String uri : urisList) {
+					if (!this.pdfGalValidator.isPDF(uri)) {
+						errors.rejectValue("files",
+								"merge.validator.files.incorrect.zip.pdf");
+						break;
+					}
+					if (this.pdfGalValidator.isEncrypted(uri)) {
+						errors.rejectValue("files",
+								"merge.validator.files.incorrect.zip.encrypted");
+						break;
+					}
+				}
+
+			}
+
+			fileInputStream.close();
+
+		} catch (final IOException e) {
+			errors.rejectValue("files", "merge.validator.files.incorrect.zip");
 		}
 	}
 
