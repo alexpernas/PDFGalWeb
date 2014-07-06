@@ -7,9 +7,13 @@
 
 <div class="padding_left">
 	<h1>
-		<label id="app_name">PDFGal</label>
+		<label id="app_name">PDFGal</label> <br /> <label id="app_version">
+			<spring:message code="common.version" />
+		</label>
 	</h1>
 </div>
+
+
 
 <div id="app_subtitle" class="padding_left">
 	<spring:message code="common.subtitle" />

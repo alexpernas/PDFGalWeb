@@ -18,6 +18,10 @@ body {
 	color: white;
 }
 
+#app_version {
+	font-size: 13px;
+}
+
 #app_subtitle {
 	font-style: oblique;
 }
@@ -38,12 +42,12 @@ body {
 	background-color: #EEEEEE;
 }
 
-.languages{
+.languages {
 	text-align: right;
 	padding-right: 10px;
 }
 
-.error{
+.error {
 	color: red;
 }
 
