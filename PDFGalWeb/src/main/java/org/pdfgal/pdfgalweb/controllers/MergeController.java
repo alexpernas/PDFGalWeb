@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.MergeForm;
 import org.pdfgal.pdfgalweb.services.MergeService;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
@@ -37,7 +38,7 @@ public class MergeController extends BaseController {
 	@Autowired
 	private PDFGalWebUtils pdfGalWebUtils;
 
-	@InitBinder
+	@InitBinder(MERGE_FORM)
 	protected void initBinder(final WebDataBinder binder) {
 		binder.setValidator(this.mergeValidator);
 	}
@@ -49,9 +50,7 @@ public class MergeController extends BaseController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public final ModelAndView getInicioPage() {
-		final ModelAndView mav = new ModelAndView("merge");
-		mav.addObject(MERGE_FORM, new MergeForm());
-		return mav;
+		return this.getModelAndView();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -66,8 +65,10 @@ public class MergeController extends BaseController {
 		final List<MultipartFile> files = mergeForm.getFiles();
 		final String fileName = mergeForm.getFileName();
 
+		DownloadForm downloadForm = new DownloadForm();
+
 		try {
-			this.mergeService.merge(files, fileName, response);
+			downloadForm = this.mergeService.merge(files, fileName, response);
 		} catch (final Exception e) {
 			// Default error is added
 			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
@@ -75,6 +76,21 @@ public class MergeController extends BaseController {
 			return new ModelAndView("merge");
 		}
 
-		return null;
+		final ModelAndView mav = this.getModelAndView();
+		mav.addObject("downloadForm", downloadForm);
+
+		return mav;
+	}
+
+	/**
+	 * Returns the {@link ModelAndView} for protection.
+	 * 
+	 * @return
+	 */
+	private ModelAndView getModelAndView() {
+
+		final ModelAndView mav = new ModelAndView("merge");
+		mav.addObject(MERGE_FORM, new MergeForm());
+		return mav;
 	}
 }

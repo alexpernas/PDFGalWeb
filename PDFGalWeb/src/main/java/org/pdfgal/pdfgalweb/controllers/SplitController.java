@@ -3,6 +3,7 @@ package org.pdfgal.pdfgalweb.controllers;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.SplitForm;
 import org.pdfgal.pdfgalweb.model.enumerated.SplitMode;
 import org.pdfgal.pdfgalweb.services.SplitService;
@@ -36,7 +37,7 @@ public class SplitController extends BaseController {
 	@Autowired
 	private PDFGalWebUtils pdfGalWebUtils;
 
-	@InitBinder
+	@InitBinder(SPLIT_FORM)
 	protected void initBinder(final WebDataBinder binder) {
 		binder.setValidator(this.splitValidator);
 	}
@@ -48,9 +49,7 @@ public class SplitController extends BaseController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public final ModelAndView getInicioPage() {
-		final ModelAndView mav = this.getModelAndView();
-		mav.addObject(SPLIT_FORM, new SplitForm());
-		return mav;
+		return this.getModelAndView(true);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -59,34 +58,45 @@ public class SplitController extends BaseController {
 			final BindingResult result, final HttpServletResponse response) {
 
 		if (result.hasErrors()) {
-			return this.getModelAndView();
+			return this.getModelAndView(false);
 		}
 
 		final MultipartFile file = splitForm.getFile();
 		final SplitMode splitMode = splitForm.getSplitMode();
 		final String pages = splitForm.getPages();
 
+		DownloadForm downloadForm = new DownloadForm();
+
 		try {
-			this.splitService.split(file, splitMode, pages, response);
+			downloadForm = this.splitService.split(file, splitMode, pages,
+					response);
 		} catch (final Exception e) {
 			// Default error is added
 			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
 					SPLIT_FORM, "pages", pages, "split.validator.error"));
-			return this.getModelAndView();
+			return this.getModelAndView(false);
 		}
 
-		return null;
+		final ModelAndView mav = this.getModelAndView(true);
+		mav.addObject("downloadForm", downloadForm);
+
+		return mav;
 	}
 
 	/**
 	 * Returns a new {@link ModelAndView} for splitting page, including the
 	 * {@link SplitMode} but not the {@link SplitForm}.
 	 * 
+	 * @param splitForm
+	 * 
 	 * @return
 	 */
-	private ModelAndView getModelAndView() {
+	private ModelAndView getModelAndView(final boolean splitForm) {
 		final ModelAndView mav = new ModelAndView("split");
 		mav.addObject("splitModes", SplitMode.values());
+		if (splitForm) {
+			mav.addObject(SPLIT_FORM, new SplitForm());
+		}
 		return mav;
 	}
 }

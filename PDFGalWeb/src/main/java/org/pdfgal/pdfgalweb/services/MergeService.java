@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface MergeService {
 
-	public void merge(List<MultipartFile> files, String fileName,
+	public DownloadForm merge(List<MultipartFile> files, String fileName,
 			HttpServletResponse response) throws Exception;
 
 }

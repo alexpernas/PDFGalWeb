@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jsp/common/includes.jsp"%>
+<%@ include file="/WEB-INF/jsp/common/download.jsp" %>
 
 <spring:url value="/merge" var="execute" />
 

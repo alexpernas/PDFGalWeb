@@ -11,6 +11,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.pdfgal.pdfgal.pdfgal.PDFGal;
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.services.MergeService;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.pdfgal.pdfgalweb.utils.ZipUtils;
@@ -31,8 +32,11 @@ public class MergeServiceImpl implements MergeService {
 	private ZipUtils zipUtils;
 
 	@Override
-	public void merge(final List<MultipartFile> files, final String fileName,
-			final HttpServletResponse response) throws Exception {
+	public DownloadForm merge(final List<MultipartFile> files,
+			final String fileName, final HttpServletResponse response)
+			throws Exception {
+
+		DownloadForm result = new DownloadForm();
 
 		if (CollectionUtils.isNotEmpty(files)
 				&& StringUtils.isNotBlank(fileName)) {
@@ -57,12 +61,9 @@ public class MergeServiceImpl implements MergeService {
 				// Merge documents
 				this.pdfGal.merge(inputUris, outputUri);
 
-				// File is prepared for download
-				this.fileUtils.prepareFileDownload(response, outputUri,
-						fileName);
-
 				this.fileUtils.delete(inputUris);
-				this.fileUtils.delete(outputUri);
+
+				result = new DownloadForm(outputUri, fileName);
 
 			} catch (COSVisitorException | IOException e) {
 				this.fileUtils.delete(inputUris);
@@ -70,6 +71,8 @@ public class MergeServiceImpl implements MergeService {
 				throw e;
 			}
 		}
+
+		return result;
 	}
 
 }

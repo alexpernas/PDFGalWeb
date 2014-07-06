@@ -3,6 +3,7 @@ package org.pdfgal.pdfgalweb.controllers;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.ProtectForm;
 import org.pdfgal.pdfgalweb.services.ProtectService;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
@@ -35,7 +36,7 @@ public class ProtectController extends BaseController {
 	@Autowired
 	private PDFGalWebUtils pdfGalWebUtils;
 
-	@InitBinder
+	@InitBinder(PROTECT_FORM)
 	protected void initBinder(final WebDataBinder binder) {
 		binder.setValidator(this.protectValidator);
 	}
@@ -47,9 +48,7 @@ public class ProtectController extends BaseController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public final ModelAndView getInicioPage() {
-		final ModelAndView mav = new ModelAndView("protect");
-		mav.addObject(PROTECT_FORM, new ProtectForm());
-		return mav;
+		return this.getModelAndView();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -65,9 +64,11 @@ public class ProtectController extends BaseController {
 		final String password = protectForm.getPassword();
 		final String repeatedPassword = protectForm.getRepeatedPassword();
 
+		DownloadForm downloadForm = new DownloadForm();
+
 		try {
-			this.protectService.protect(file, password, repeatedPassword,
-					response);
+			downloadForm = this.protectService.protect(file, password,
+					repeatedPassword, response);
 		} catch (final Exception e) {
 			// Default error is added
 			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
@@ -76,6 +77,21 @@ public class ProtectController extends BaseController {
 			return new ModelAndView("protect");
 		}
 
-		return null;
+		final ModelAndView mav = this.getModelAndView();
+		mav.addObject("downloadForm", downloadForm);
+
+		return mav;
+	}
+
+	/**
+	 * Returns the {@link ModelAndView} for protection.
+	 * 
+	 * @return
+	 */
+	private ModelAndView getModelAndView() {
+
+		final ModelAndView mav = new ModelAndView("protect");
+		mav.addObject(PROTECT_FORM, new ProtectForm());
+		return mav;
 	}
 }

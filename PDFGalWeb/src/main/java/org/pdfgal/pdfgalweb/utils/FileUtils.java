@@ -58,9 +58,8 @@ public interface FileUtils {
 			String fileName) throws IOException;
 
 	/**
+	 * Prepares a new ZIP file.
 	 * 
-	 * @param response
-	 *            The HttpServletResponse.
 	 * @param urisList
 	 *            The URIs of the files to download.
 	 * @param fileName
@@ -68,8 +67,7 @@ public interface FileUtils {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	void prepareFileDownload(HttpServletResponse response,
-			List<String> urisList, String fileName)
+	String prepareZipFile(List<String> urisList, String fileName)
 			throws FileNotFoundException, IOException;
 
 	/**
@@ -94,5 +92,13 @@ public interface FileUtils {
 	 *         stored.
 	 */
 	List<String> saveFile(List<MultipartFile> files);
+
+	/**
+	 * Returns the file name in the argument without the extension.
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	String getFileNameWithoutExtension(String fileName);
 
 }

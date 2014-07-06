@@ -3,6 +3,7 @@ package org.pdfgal.pdfgalweb.controllers;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.UnProtectForm;
 import org.pdfgal.pdfgalweb.services.UnProtectService;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
@@ -35,7 +36,7 @@ public class UnProtectController extends BaseController {
 	@Autowired
 	private PDFGalWebUtils pdfGalWebUtils;
 
-	@InitBinder
+	@InitBinder(UNPROTECT_FORM)
 	protected void initBinder(final WebDataBinder binder) {
 		binder.setValidator(this.unProtectValidator);
 	}
@@ -47,9 +48,7 @@ public class UnProtectController extends BaseController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public final ModelAndView getInicioPage() {
-		final ModelAndView mav = new ModelAndView("unprotect");
-		mav.addObject(UNPROTECT_FORM, new UnProtectForm());
-		return mav;
+		return this.getModelAndView();
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -64,8 +63,11 @@ public class UnProtectController extends BaseController {
 		final MultipartFile file = unProtectForm.getFile();
 		final String password = unProtectForm.getPassword();
 
+		DownloadForm downloadForm = new DownloadForm();
+
 		try {
-			this.unProtectService.unProtect(file, password, response);
+			downloadForm = this.unProtectService.unProtect(file, password,
+					response);
 		} catch (final Exception e) {
 			// Default error is added
 			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
@@ -74,6 +76,21 @@ public class UnProtectController extends BaseController {
 			return new ModelAndView("unprotect");
 		}
 
-		return null;
+		final ModelAndView mav = this.getModelAndView();
+		mav.addObject("downloadForm", downloadForm);
+
+		return mav;
+	}
+
+	/**
+	 * Returns the {@link ModelAndView} for unprotection.
+	 * 
+	 * @return
+	 */
+	private ModelAndView getModelAndView() {
+
+		final ModelAndView mav = new ModelAndView("unprotect");
+		mav.addObject(UNPROTECT_FORM, new UnProtectForm());
+		return mav;
 	}
 }

@@ -74,24 +74,15 @@ public class FileUtilsImpl implements FileUtils {
 	}
 
 	@Override
-	public void prepareFileDownload(final HttpServletResponse response,
-			final List<String> urisList, final String fileName)
-			throws FileNotFoundException, IOException {
+	public String prepareZipFile(final List<String> urisList,
+			final String fileName) throws FileNotFoundException, IOException {
 
 		// It's supposed that file extension (dot included) is 4 digits.
-		final String fileNameWithoutExtension = fileName.substring(0,
-				fileName.length() - 4);
+		final String fileNameWithoutExtension = this
+				.getFileNameWithoutExtension(fileName);
 
 		// Files are included into a ZIP File
-		final String zipUri = this.zipUtils.zipFiles(urisList,
-				fileNameWithoutExtension);
-
-		// File is prepared for download
-		this.prepareFileDownload(response, zipUri, fileNameWithoutExtension
-				+ ".zip");
-
-		// File is deleted from system
-		this.delete(zipUri);
+		return this.zipUtils.zipFiles(urisList, fileNameWithoutExtension);
 	}
 
 	@Override
@@ -136,6 +127,18 @@ public class FileUtilsImpl implements FileUtils {
 					result.add(path);
 				}
 			}
+		}
+
+		return result;
+	}
+
+	@Override
+	public String getFileNameWithoutExtension(final String fileName) {
+
+		String result = "";
+
+		if (StringUtils.isNotBlank(fileName) && fileName.length() > 4) {
+			result = fileName.substring(0, fileName.length() - 4);
 		}
 
 		return result;

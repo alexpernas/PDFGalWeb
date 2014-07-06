@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.exceptions.CryptographyException;
 import org.apache.pdfbox.pdmodel.encryption.BadSecurityHandlerException;
+import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UnProtectService {
 
-	public void unProtect(MultipartFile file, String password,
+	public DownloadForm unProtect(MultipartFile file, String password,
 			HttpServletResponse response) throws COSVisitorException,
 			IOException, BadSecurityHandlerException, CryptographyException;
 
