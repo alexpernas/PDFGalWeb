@@ -66,8 +66,8 @@ public class FileUtilsImpl implements FileUtils {
 			final String uri, final String fileName) throws IOException {
 
 		final FileInputStream fileInputStream = new FileInputStream(uri);
-		response.setHeader("Content-Disposition", "attachment; filename="
-				+ fileName);
+		response.setHeader("Content-Disposition", "attachment; filename=\""
+				+ fileName + "\"");
 		IOUtils.copyLarge(fileInputStream, response.getOutputStream());
 		fileInputStream.close();
 	}
