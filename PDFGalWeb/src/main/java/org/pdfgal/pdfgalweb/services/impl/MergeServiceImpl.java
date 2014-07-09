@@ -63,7 +63,7 @@ public class MergeServiceImpl implements MergeService {
 
 				this.fileUtils.delete(inputUris);
 
-				result = new DownloadForm(outputUri, fileName);
+				result = new DownloadForm(outputUri, fileName + ".pdf");
 
 			} catch (COSVisitorException | IOException e) {
 				this.fileUtils.delete(inputUris);
