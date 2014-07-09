@@ -10,14 +10,18 @@ public class DownloadForm implements Serializable {
 
 	private String name;
 
+	private String content;
+
 	public DownloadForm() {
 		super();
 	}
 
-	public DownloadForm(final String uri, final String name) {
+	public DownloadForm(final String uri, final String name,
+			final String content) {
 		super();
 		this.uri = uri;
 		this.name = name;
+		this.content = content;
 	}
 
 	public String getUri() {
@@ -34,6 +38,14 @@ public class DownloadForm implements Serializable {
 
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(final String content) {
+		this.content = content;
 	}
 
 }

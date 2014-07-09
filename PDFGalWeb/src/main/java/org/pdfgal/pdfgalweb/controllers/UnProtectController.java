@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.UnProtectForm;
 import org.pdfgal.pdfgalweb.services.UnProtectService;
+import org.pdfgal.pdfgalweb.utils.Constants;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.UnProtectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class UnProtectController extends BaseController {
 		}
 
 		final ModelAndView mav = this.getModelAndView();
-		mav.addObject("downloadForm", downloadForm);
+		mav.addObject(Constants.DOWNLOAD_FORM, downloadForm);
 
 		return mav;
 	}

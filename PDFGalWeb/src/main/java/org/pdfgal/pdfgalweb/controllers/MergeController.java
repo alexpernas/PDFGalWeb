@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.MergeForm;
 import org.pdfgal.pdfgalweb.services.MergeService;
+import org.pdfgal.pdfgalweb.utils.Constants;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.MergeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class MergeController extends BaseController {
 		}
 
 		final ModelAndView mav = this.getModelAndView();
-		mav.addObject("downloadForm", downloadForm);
+		mav.addObject(Constants.DOWNLOAD_FORM, downloadForm);
 
 		return mav;
 	}

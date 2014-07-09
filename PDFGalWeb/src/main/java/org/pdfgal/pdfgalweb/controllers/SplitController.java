@@ -7,6 +7,7 @@ import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.forms.SplitForm;
 import org.pdfgal.pdfgalweb.model.enumerated.SplitMode;
 import org.pdfgal.pdfgalweb.services.SplitService;
+import org.pdfgal.pdfgalweb.utils.Constants;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.SplitValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ public class SplitController extends BaseController {
 		}
 
 		final ModelAndView mav = this.getModelAndView(true);
-		mav.addObject("downloadForm", downloadForm);
+		mav.addObject(Constants.DOWNLOAD_FORM, downloadForm);
 
 		return mav;
 	}

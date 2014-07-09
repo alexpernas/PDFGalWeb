@@ -9,6 +9,7 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.encryption.BadSecurityHandlerException;
 import org.pdfgal.pdfgal.pdfgal.PDFGal;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
+import org.pdfgal.pdfgalweb.model.enumerated.ContentType;
 import org.pdfgal.pdfgalweb.services.ProtectService;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,8 @@ public class ProtectServiceImpl implements ProtectService {
 			// Temporal files are deleted from system
 			this.fileUtils.delete(inputUri);
 
-			result = new DownloadForm(outputUri, originalName);
+			result = new DownloadForm(outputUri, originalName,
+					ContentType.PDF.getValue());
 		}
 
 		return result;

@@ -52,10 +52,12 @@ public interface FileUtils {
 	 *            The URI of the file to download.
 	 * @param fileName
 	 *            The file name of the file to download.
+	 * @param contentType
+	 *            ContentType of the file to download.
 	 * @throws IOException
 	 */
 	void prepareFileDownload(HttpServletResponse response, String uri,
-			String fileName) throws IOException;
+			String fileName, String contentType) throws IOException;
 
 	/**
 	 * Prepares a new ZIP file.

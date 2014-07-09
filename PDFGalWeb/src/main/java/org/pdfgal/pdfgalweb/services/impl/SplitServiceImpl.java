@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.pdfgal.pdfgal.pdfgal.PDFGal;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
+import org.pdfgal.pdfgalweb.model.enumerated.ContentType;
 import org.pdfgal.pdfgalweb.model.enumerated.SplitMode;
 import org.pdfgal.pdfgalweb.services.SplitService;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
@@ -64,7 +65,8 @@ public class SplitServiceImpl implements SplitService {
 
 				final String zipName = this.fileUtils
 						.getFileNameWithoutExtension(originalName) + ".zip";
-				result = new DownloadForm(outputUri, zipName);
+				result = new DownloadForm(outputUri, zipName,
+						ContentType.ZIP.getValue());
 
 			} catch (final Exception e) {
 				// Temporal files are deleted from system (outputUris has

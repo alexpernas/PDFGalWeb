@@ -63,10 +63,11 @@ public class FileUtilsImpl implements FileUtils {
 
 	@Override
 	public void prepareFileDownload(final HttpServletResponse response,
-			final String uri, final String fileName) throws IOException {
+			final String uri, final String fileName, final String contentType)
+			throws IOException {
 
 		final FileInputStream fileInputStream = new FileInputStream(uri);
-		response.setContentType("application/pdf");
+		response.setContentType(contentType);
 		response.setHeader("Content-Disposition", "attachment; filename="
 				+ fileName);
 		IOUtils.copyLarge(fileInputStream, response.getOutputStream());
