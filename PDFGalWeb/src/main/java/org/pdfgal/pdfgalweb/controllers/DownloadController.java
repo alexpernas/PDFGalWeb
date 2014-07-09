@@ -30,11 +30,9 @@ public class DownloadController extends BaseController {
 
 		final String uri = downloadForm.getUri();
 		final String name = downloadForm.getName();
-		final String contentType = downloadForm.getContent();
 
 		try {
-			this.fileUtils
-					.prepareFileDownload(response, uri, name, contentType);
+			this.fileUtils.prepareFileDownload(response, uri, name);
 			this.fileUtils.delete(uri);
 		} catch (final IOException e) {
 			this.fileUtils.delete(uri);

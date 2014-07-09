@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.pdfgal.pdfgal.pdfgal.PDFGal;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
-import org.pdfgal.pdfgalweb.model.enumerated.ContentType;
 import org.pdfgal.pdfgalweb.services.MergeService;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.pdfgal.pdfgalweb.utils.ZipUtils;
@@ -64,8 +63,7 @@ public class MergeServiceImpl implements MergeService {
 
 				this.fileUtils.delete(inputUris);
 
-				result = new DownloadForm(outputUri, fileName,
-						ContentType.PDF.getValue());
+				result = new DownloadForm(outputUri, fileName);
 
 			} catch (COSVisitorException | IOException e) {
 				this.fileUtils.delete(inputUris);

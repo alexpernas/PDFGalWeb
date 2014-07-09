@@ -10,7 +10,6 @@ import org.apache.pdfbox.exceptions.CryptographyException;
 import org.apache.pdfbox.pdmodel.encryption.BadSecurityHandlerException;
 import org.pdfgal.pdfgal.pdfgal.PDFGal;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
-import org.pdfgal.pdfgalweb.model.enumerated.ContentType;
 import org.pdfgal.pdfgalweb.services.UnProtectService;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +53,7 @@ public class UnProtectServiceImpl implements UnProtectService {
 			// Temporal files are deleted from system
 			this.fileUtils.delete(inputUri);
 
-			result = new DownloadForm(outputUri, originalName,
-					ContentType.PDF.getValue());
+			result = new DownloadForm(outputUri, originalName);
 		}
 
 		return result;
