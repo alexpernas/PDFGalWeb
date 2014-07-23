@@ -29,3 +29,9 @@
 		<spring:message code="menu.unprotect" />
 	</a>
 </div>
+
+<div class="menu_item">
+	<a href="${pageContext.servletContext.contextPath}/watermark.html">
+		<spring:message code="menu.watermark" />
+	</a>
+</div>

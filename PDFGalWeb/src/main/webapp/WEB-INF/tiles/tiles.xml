@@ -30,4 +30,9 @@
     <put-attribute name="content" value="/WEB-INF/jsp/unprotect/unprotect.jsp" />
   </definition>
 
+  <definition name="watermark" template="/WEB-INF/jsp/common/template.jsp">
+    <put-attribute name="title" value="watermark.title" />
+    <put-attribute name="content" value="/WEB-INF/jsp/watermark/watermark.jsp" />
+  </definition>
+
 </tiles-definitions>
