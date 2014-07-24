@@ -3,6 +3,7 @@ package org.pdfgal.pdfgalweb.forms;
 import java.awt.Color;
 import java.io.Serializable;
 
+import org.pdfgal.pdfgal.model.enumerated.WatermarkPosition;
 import org.springframework.web.multipart.MultipartFile;
 
 public class WatermarkForm implements Serializable {
@@ -16,6 +17,10 @@ public class WatermarkForm implements Serializable {
 	private Color color;
 
 	private Float Alpha;
+
+	private WatermarkPosition watermarkPosition;
+
+	private String pages;
 
 	/**
 	 * @return the file
@@ -71,6 +76,34 @@ public class WatermarkForm implements Serializable {
 	 */
 	public void setAlpha(final Float alpha) {
 		this.Alpha = alpha;
+	}
+
+	/**
+	 * @return the watermarkPosition
+	 */
+	public WatermarkPosition getWatermarkPosition() {
+		return this.watermarkPosition;
+	}
+
+	/**
+	 * @param watermarkPosition the watermarkPosition to set
+	 */
+	public void setWatermarkPosition(final WatermarkPosition watermarkPosition) {
+		this.watermarkPosition = watermarkPosition;
+	}
+
+	/**
+	 * @return the pages
+	 */
+	public String getPages() {
+		return this.pages;
+	}
+
+	/**
+	 * @param pages the pages to set
+	 */
+	public void setPages(final String pages) {
+		this.pages = pages;
 	}
 
 }

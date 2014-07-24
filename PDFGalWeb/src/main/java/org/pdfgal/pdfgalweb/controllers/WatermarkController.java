@@ -3,7 +3,9 @@ package org.pdfgal.pdfgalweb.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.pdfgal.pdfgal.model.enumerated.WatermarkPosition;
 import org.pdfgal.pdfgalweb.forms.WatermarkForm;
+import org.pdfgal.pdfgalweb.model.enumerated.CustomColor;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,13 +44,18 @@ public class WatermarkController extends BaseController {
 		final ModelAndView mav = new ModelAndView("watermark");
 
 		mav.addObject(WATERMARK_FORM, new WatermarkForm());
-		mav.addObject("colors", this.pdfGalWebUtils.getColors());
+		mav.addObject("colors", CustomColor.values());
 
 		final List<Float> alphaList = new ArrayList<Float>();
-		for (float i = 0.1f; i <= 1.0f; i = i + 0.1f) {
-			alphaList.add(i);
+		for (float i = 0.1f; i < 1.05f; i = i + 0.1f) {
+			// Float is formatted because it will not always be #.#, this is
+			// because sometimes, in float type, 0.1 + 0.1 may result 0.2000001
+			final String value = String.valueOf(i);
+			alphaList.add(Float.valueOf(value.substring(0, 3)));
 		}
-		mav.addObject("alphaList", this.pdfGalWebUtils.getColors());
+		mav.addObject("alphaList", alphaList);
+
+		mav.addObject("watermarkPositions", WatermarkPosition.values());
 
 		return mav;
 	}

@@ -1,8 +1,5 @@
 package org.pdfgal.pdfgalweb.utils;
 
-import java.awt.Color;
-import java.util.List;
-
 import org.springframework.validation.FieldError;
 
 /**
@@ -25,11 +22,5 @@ public interface PDFGalWebUtils {
 	 */
 	public FieldError createDefaultFieldError(String objectName, String field,
 			Object rejectedValue, String code);
-
-	/**
-	 * Creates a list with the existing {@link Color} for the application.
-	 * @return
-	 */
-	public List<Color> getColors();
 
 }
