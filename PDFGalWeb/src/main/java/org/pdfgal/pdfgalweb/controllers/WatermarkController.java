@@ -7,8 +7,11 @@ import org.pdfgal.pdfgal.model.enumerated.WatermarkPosition;
 import org.pdfgal.pdfgalweb.forms.WatermarkForm;
 import org.pdfgal.pdfgalweb.model.enumerated.CustomColor;
 import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
+import org.pdfgal.pdfgalweb.validators.WatermarkValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +26,14 @@ public class WatermarkController extends BaseController {
 
 	@Autowired
 	private PDFGalWebUtils pdfGalWebUtils;
+
+	@Autowired
+	private WatermarkValidator watermarkValidator;
+
+	@InitBinder(WATERMARK_FORM)
+	protected void initBinder(final WebDataBinder binder) {
+		binder.setValidator(this.watermarkValidator);
+	}
 
 	/**
 	 * Start Page for adding watermark.

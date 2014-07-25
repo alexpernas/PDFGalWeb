@@ -1,6 +1,10 @@
 package org.pdfgal.pdfgalweb.validators.utils.impl;
 
+import java.io.IOException;
+import java.util.StringTokenizer;
+
 import org.apache.commons.lang3.StringUtils;
+import org.pdfgal.pdfgal.utils.PDFUtils;
 import org.pdfgal.pdfgal.validator.PDFGalValidator;
 import org.pdfgal.pdfgalweb.model.enumerated.PDFEncryptionType;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
@@ -20,6 +24,9 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 
 	@Autowired
 	private PDFGalValidator pdfGalValidator;
+
+	@Autowired
+	private PDFUtils pdfUtils;
 
 	@Override
 	public boolean validateFileName(final String fileName) {
@@ -87,5 +94,56 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean validateConcretePages(final String pages,
+			final MultipartFile file) {
+
+		boolean result = true;
+
+		if (StringUtils.isBlank(pages)) {
+			result = false;
+		} else {
+			final StringTokenizer st = new StringTokenizer(pages, ",");
+			Integer previous = null;
+			try {
+				final Integer filePages = this.getPages(file);
+				while (st.hasMoreElements()) {
+					final Integer current = Integer.valueOf(st.nextToken());
+					if ((current.compareTo(filePages) > 0)
+							|| (current.compareTo(new Integer(2)) < 0)
+							|| (previous != null && current.compareTo(previous) <= 0)) {
+						result = false;
+						break;
+					}
+					previous = current;
+				}
+			} catch (final NumberFormatException e) {
+				// Any of the tokens is not an Integer
+				result = false;
+			} catch (final IOException e) {
+				// Problem with the PDF file, we show here no message, message
+				// will be shown below upload button
+				result = true;
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * This method returns the number of pages of the document, or throws an
+	 * {@link IOException} in case document can't be loaded or it is no PDF.
+	 * 
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	private Integer getPages(final MultipartFile file) throws IOException {
+		final String uri = this.fileUtils.saveFile(file);
+		final Integer result = this.pdfUtils.getPages(uri);
+		this.fileUtils.delete(uri);
+		return result;
 	}
 }

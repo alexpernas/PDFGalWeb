@@ -49,4 +49,14 @@ public interface ValidatorUtils {
 	public void validateFile(MultipartFile file, Errors errors,
 			PDFEncryptionType pdfEncryptionType);
 
+	/**
+	 * Validates if argument is a string of incremented {@link Integer}
+	 * separated by commas.
+	 * 
+	 * @param pages
+	 * @param file
+	 * @return
+	 */
+	boolean validateConcretePages(String pages, MultipartFile file);
+
 }
