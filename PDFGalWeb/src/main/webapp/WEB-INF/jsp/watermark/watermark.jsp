@@ -54,7 +54,7 @@
 		<br /> <br />
 
 		<spring:message code="watermark.color.label" />
-		<form:select path="color">
+		<form:select path="customColor">
 			<c:forEach var="item" items="${colors}">
 				<form:option value="${item}">
 					<spring:message code="${item}" />

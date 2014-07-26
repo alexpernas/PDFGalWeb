@@ -98,27 +98,18 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 
 	@Override
 	public boolean validateConcretePages(final String pages,
-			final MultipartFile file) {
+			final MultipartFile file, final String delim1, final String delim2,
+			final boolean testMoreThanOne) {
 
 		boolean result = true;
 
 		if (StringUtils.isBlank(pages)) {
 			result = false;
 		} else {
-			final StringTokenizer st = new StringTokenizer(pages, ",");
-			Integer previous = null;
 			try {
 				final Integer filePages = this.getPages(file);
-				while (st.hasMoreElements()) {
-					final Integer current = Integer.valueOf(st.nextToken());
-					if ((current.compareTo(filePages) > 0)
-							|| (current.compareTo(new Integer(2)) < 0)
-							|| (previous != null && current.compareTo(previous) <= 0)) {
-						result = false;
-						break;
-					}
-					previous = current;
-				}
+				result = this.validateConcretePagesLoop(filePages, pages,
+						delim1, delim2, testMoreThanOne);
 			} catch (final NumberFormatException e) {
 				// Any of the tokens is not an Integer
 				result = false;
@@ -126,6 +117,72 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 				// Problem with the PDF file, we show here no message, message
 				// will be shown below upload button
 				result = true;
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * This method represents the loop for the validateConcretePages method.
+	 * 
+	 * @param totalPages
+	 * @param pages
+	 * @param delim1
+	 * @param delim2
+	 * @param moreThanOne
+	 * @return
+	 */
+	private boolean validateConcretePagesLoop(final Integer totalPages,
+			final String pages, final String delim1, final String delim2,
+			final boolean testMoreThanOne) {
+
+		boolean result = false;
+
+		if (totalPages != null && StringUtils.isNotEmpty(pages)
+				&& StringUtils.isNotEmpty(delim1)) {
+
+			result = true;
+
+			final StringTokenizer st = new StringTokenizer(pages, delim1);
+			Integer previous = null;
+			String token = null;
+			if ("-".equals(delim1) && st.countTokens() != 2) {
+				result = false;
+			} else {
+				while (st.hasMoreElements()) {
+					try {
+						token = st.nextToken();
+						final Integer current = Integer.valueOf(token);
+						boolean isMoreThan = true;
+						if (testMoreThanOne) {
+							isMoreThan = (current.compareTo(new Integer(2)) < 0);
+						} else {
+							isMoreThan = (current.compareTo(new Integer(1)) < 0);
+						}
+						if ((current.compareTo(totalPages) > 0)
+								|| isMoreThan
+								|| (previous != null && current
+										.compareTo(previous) <= 0)) {
+							result = false;
+							break;
+						}
+						previous = current;
+
+					} catch (final Exception e) {
+						if (StringUtils.isNotEmpty(delim2)) {
+							result = this.validateConcretePagesLoop(totalPages,
+									token, delim2, null, testMoreThanOne);
+
+						} else {
+							result = false;
+						}
+
+						if (!result) {
+							break;
+						}
+					}
+				}
 			}
 		}
 

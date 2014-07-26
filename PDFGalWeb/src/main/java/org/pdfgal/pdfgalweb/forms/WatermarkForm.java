@@ -1,9 +1,9 @@
 package org.pdfgal.pdfgalweb.forms;
 
-import java.awt.Color;
 import java.io.Serializable;
 
 import org.pdfgal.pdfgal.model.enumerated.WatermarkPosition;
+import org.pdfgal.pdfgalweb.model.enumerated.CustomColor;
 import org.springframework.web.multipart.MultipartFile;
 
 public class WatermarkForm implements Serializable {
@@ -14,7 +14,7 @@ public class WatermarkForm implements Serializable {
 
 	private String text;
 
-	private Color color;
+	private CustomColor customColor;
 
 	private Float Alpha;
 
@@ -30,7 +30,8 @@ public class WatermarkForm implements Serializable {
 	}
 
 	/**
-	 * @param file the file to set
+	 * @param file
+	 *            the file to set
 	 */
 	public void setFile(final MultipartFile file) {
 		this.file = file;
@@ -44,24 +45,19 @@ public class WatermarkForm implements Serializable {
 	}
 
 	/**
-	 * @param text the text to set
+	 * @param text
+	 *            the text to set
 	 */
 	public void setText(final String text) {
 		this.text = text;
 	}
 
-	/**
-	 * @return the color
-	 */
-	public Color getColor() {
-		return this.color;
+	public CustomColor getCustomColor() {
+		return this.customColor;
 	}
 
-	/**
-	 * @param color the color to set
-	 */
-	public void setColor(final Color color) {
-		this.color = color;
+	public void setCustomColor(final CustomColor customColor) {
+		this.customColor = customColor;
 	}
 
 	/**
@@ -72,7 +68,8 @@ public class WatermarkForm implements Serializable {
 	}
 
 	/**
-	 * @param alpha the alpha to set
+	 * @param alpha
+	 *            the alpha to set
 	 */
 	public void setAlpha(final Float alpha) {
 		this.Alpha = alpha;
@@ -86,7 +83,8 @@ public class WatermarkForm implements Serializable {
 	}
 
 	/**
-	 * @param watermarkPosition the watermarkPosition to set
+	 * @param watermarkPosition
+	 *            the watermarkPosition to set
 	 */
 	public void setWatermarkPosition(final WatermarkPosition watermarkPosition) {
 		this.watermarkPosition = watermarkPosition;
@@ -100,7 +98,8 @@ public class WatermarkForm implements Serializable {
 	}
 
 	/**
-	 * @param pages the pages to set
+	 * @param pages
+	 *            the pages to set
 	 */
 	public void setPages(final String pages) {
 		this.pages = pages;

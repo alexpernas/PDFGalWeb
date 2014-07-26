@@ -47,7 +47,8 @@ public class SplitValidator implements Validator {
 		} else if (SplitMode.CONCRETE_PAGES_TO_SPLIT.equals(splitMode)) {
 			// Pages validation when SplitMode refers to the concrete pages to
 			// split the document
-			if (!this.validatorUtils.validateConcretePages(pages, file)) {
+			if (!this.validatorUtils.validateConcretePages(pages, file, ",",
+					null, true)) {
 				errors.rejectValue("pages", "split.validator.pages.concrete");
 			}
 		}

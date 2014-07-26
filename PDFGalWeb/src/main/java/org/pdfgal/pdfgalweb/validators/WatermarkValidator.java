@@ -48,6 +48,10 @@ public class WatermarkValidator implements Validator {
 				watermarkForm.getWatermarkPosition(), file, errors);
 
 		// Pages validation
+		if (!this.validatorUtils.validateConcretePages(
+				watermarkForm.getPages(), file, ",", "-", false)) {
+			errors.rejectValue("pages", "watermark.validator.pages");
+		}
 	}
 
 	/**
