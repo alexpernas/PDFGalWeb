@@ -35,3 +35,9 @@
 		<spring:message code="menu.watermark" />
 	</a>
 </div>
+
+<div class="menu_item">
+	<a href="${pageContext.servletContext.contextPath}/bookmark.html">
+		<spring:message code="menu.bookmark" />
+	</a>
+</div>
