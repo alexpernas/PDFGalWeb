@@ -93,6 +93,12 @@ body {
 	width: 20%;
 }
 
+.horizontal_short {
+	float: left;
+	width: 45px;
+	font-weight: bold;
+}
+
 /* ***** */
 /* LINKS */
 /* ***** */
@@ -119,8 +125,16 @@ a:active { /* Active link */
 	width: 400px;
 }
 
+.input_short {
+	width: 30px;
+}
+
 .input_password {
 	width: 200px;
+}
+
+.bold {
+	font-weight: bold;
 }
 
 /* ******* */
