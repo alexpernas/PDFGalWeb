@@ -3,7 +3,6 @@ package org.pdfgal.pdfgalweb.forms;
 import java.io.Serializable;
 import java.util.List;
 
-import org.pdfgal.pdfgal.model.PDFGalBookmark;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BookmarkForm implements Serializable {
@@ -14,7 +13,9 @@ public class BookmarkForm implements Serializable {
 
 	private String title;
 
-	private List<PDFGalBookmark> bookmarks;
+	private List<Integer> pagesList;
+
+	private List<String> textsList;
 
 	public MultipartFile getFile() {
 		return this.file;
@@ -39,17 +40,31 @@ public class BookmarkForm implements Serializable {
 	}
 
 	/**
-	 * @return the bookmarks
+	 * @return the pagesList
 	 */
-	public List<PDFGalBookmark> getBookmarks() {
-		return this.bookmarks;
+	public List<Integer> getPagesList() {
+		return this.pagesList;
 	}
 
 	/**
-	 * @param bookmarks the bookmarks to set
+	 * @param pagesList the pagesList to set
 	 */
-	public void setBookmarks(final List<PDFGalBookmark> bookmarks) {
-		this.bookmarks = bookmarks;
+	public void setPagesList(final List<Integer> pagesList) {
+		this.pagesList = pagesList;
+	}
+
+	/**
+	 * @return the textsList
+	 */
+	public List<String> getTextsList() {
+		return this.textsList;
+	}
+
+	/**
+	 * @param textsList the textsList to set
+	 */
+	public void setTextsList(final List<String> textsList) {
+		this.textsList = textsList;
 	}
 
 }

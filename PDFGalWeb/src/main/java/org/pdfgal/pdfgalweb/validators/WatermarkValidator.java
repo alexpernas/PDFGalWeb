@@ -38,18 +38,16 @@ public class WatermarkValidator implements Validator {
 
 		// File validation
 		final MultipartFile file = watermarkForm.getFile();
-		this.validatorUtils.validateFile(file, errors,
-				PDFEncryptionType.NON_ENCRYPTED);
+		this.validatorUtils.validateFile(file, errors, PDFEncryptionType.NON_ENCRYPTED);
 
 		// Text validation
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "text",
-				"common.validator.required");
-		this.validateTextLenght(watermarkForm.getText(),
-				watermarkForm.getWatermarkPosition(), file, errors);
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "text", "common.validator.required");
+		this.validateTextLenght(watermarkForm.getText(), watermarkForm.getWatermarkPosition(),
+				file, errors);
 
 		// Pages validation
-		if (!this.validatorUtils.validateConcretePages(
-				watermarkForm.getPages(), file, ",", "-", false)) {
+		if (!this.validatorUtils.validateConcretePages(watermarkForm.getPages(), file, ",", "-",
+				false)) {
 			errors.rejectValue("pages", "watermark.validator.pages");
 		}
 	}
@@ -62,12 +60,11 @@ public class WatermarkValidator implements Validator {
 	 * @param file
 	 * @param errors
 	 */
-	private void validateTextLenght(final String text,
-			final WatermarkPosition watermarkPosition,
+	private void validateTextLenght(final String text, final WatermarkPosition watermarkPosition,
 			final MultipartFile file, final Errors errors) {
 
-		if (StringUtils.isNotEmpty(text) && watermarkPosition != null
-				&& file != null && errors != null) {
+		if (StringUtils.isNotEmpty(text) && watermarkPosition != null && file != null
+				&& errors != null) {
 
 			final Integer textLenght = text.length();
 			boolean excesiveLength = true;
@@ -80,8 +77,7 @@ public class WatermarkValidator implements Validator {
 				} else {
 					final String uri = this.fileUtils.saveFile(file);
 
-					if (textLenght <= 18
-							&& this.pdfGalValidator.allLandscape(uri)) {
+					if (textLenght <= 18 && this.pdfGalValidator.allLandscape(uri)) {
 						excesiveLength = false;
 					}
 					this.fileUtils.delete(uri);

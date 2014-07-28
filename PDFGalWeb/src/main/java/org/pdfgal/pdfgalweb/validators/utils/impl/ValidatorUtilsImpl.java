@@ -8,6 +8,7 @@ import org.pdfgal.pdfgal.utils.PDFUtils;
 import org.pdfgal.pdfgal.validator.PDFGalValidator;
 import org.pdfgal.pdfgalweb.model.enumerated.PDFEncryptionType;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
+import org.pdfgal.pdfgalweb.utils.PDFGalWebUtils;
 import org.pdfgal.pdfgalweb.validators.utils.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,9 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 	private PDFGalValidator pdfGalValidator;
 
 	@Autowired
+	private PDFGalWebUtils pdfGalWebUtils;
+
+	@Autowired
 	private PDFUtils pdfUtils;
 
 	@Override
@@ -33,8 +37,7 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 
 		boolean result = false;
 
-		if (StringUtils.isNotBlank(fileName)
-				&& fileName.matches(this.FILE_NAME_PATTERN)) {
+		if (StringUtils.isNotBlank(fileName) && fileName.matches(this.FILE_NAME_PATTERN)) {
 			result = true;
 		}
 
@@ -79,27 +82,22 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 		} else {
 			final PDFEncryptionType validation = this.validatePDF(file);
 			if (PDFEncryptionType.NON_PDF.equals(validation)) {
-				errors.rejectValue("file",
-						"common.validator.file.incorrect.pdf");
+				errors.rejectValue("file", "common.validator.file.incorrect.pdf");
 
 			} else if (!validation.equals(pdfEncryptionType)) {
 
 				if (PDFEncryptionType.NON_ENCRYPTED.equals(pdfEncryptionType)) {
-					errors.rejectValue("file",
-							"common.validator.file.incorrect.encrypted.true");
-				} else if (PDFEncryptionType.ENCRYPTED
-						.equals(pdfEncryptionType)) {
-					errors.rejectValue("file",
-							"common.validator.file.incorrect.encrypted.false");
+					errors.rejectValue("file", "common.validator.file.incorrect.encrypted.true");
+				} else if (PDFEncryptionType.ENCRYPTED.equals(pdfEncryptionType)) {
+					errors.rejectValue("file", "common.validator.file.incorrect.encrypted.false");
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean validateConcretePages(final String pages,
-			final MultipartFile file, final String delim1, final String delim2,
-			final boolean testMoreThanOne) {
+	public boolean validateConcretePages(final String pages, final MultipartFile file,
+			final String delim1, final String delim2, final boolean testMoreThanOne) {
 
 		boolean result = true;
 
@@ -107,9 +105,9 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 			result = false;
 		} else {
 			try {
-				final Integer filePages = this.getPages(file);
-				result = this.validateConcretePagesLoop(filePages, pages,
-						delim1, delim2, testMoreThanOne);
+				final Integer filePages = this.pdfGalWebUtils.getPages(file);
+				result = this.validateConcretePagesLoop(filePages, pages, delim1, delim2,
+						testMoreThanOne);
 			} catch (final NumberFormatException e) {
 				// Any of the tokens is not an Integer
 				result = false;
@@ -133,14 +131,12 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 	 * @param moreThanOne
 	 * @return
 	 */
-	private boolean validateConcretePagesLoop(final Integer totalPages,
-			final String pages, final String delim1, final String delim2,
-			final boolean testMoreThanOne) {
+	private boolean validateConcretePagesLoop(final Integer totalPages, final String pages,
+			final String delim1, final String delim2, final boolean testMoreThanOne) {
 
 		boolean result = false;
 
-		if (totalPages != null && StringUtils.isNotEmpty(pages)
-				&& StringUtils.isNotEmpty(delim1)) {
+		if (totalPages != null && StringUtils.isNotEmpty(pages) && StringUtils.isNotEmpty(delim1)) {
 
 			result = true;
 
@@ -160,10 +156,8 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 						} else {
 							isMoreThan = (current.compareTo(new Integer(1)) < 0);
 						}
-						if ((current.compareTo(totalPages) > 0)
-								|| isMoreThan
-								|| (previous != null && current
-										.compareTo(previous) <= 0)) {
+						if ((current.compareTo(totalPages) > 0) || isMoreThan
+								|| (previous != null && current.compareTo(previous) <= 0)) {
 							result = false;
 							break;
 						}
@@ -171,8 +165,8 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 
 					} catch (final Exception e) {
 						if (StringUtils.isNotEmpty(delim2)) {
-							result = this.validateConcretePagesLoop(totalPages,
-									token, delim2, null, testMoreThanOne);
+							result = this.validateConcretePagesLoop(totalPages, token, delim2,
+									null, testMoreThanOne);
 
 						} else {
 							result = false;
@@ -186,21 +180,6 @@ public class ValidatorUtilsImpl implements ValidatorUtils {
 			}
 		}
 
-		return result;
-	}
-
-	/**
-	 * This method returns the number of pages of the document, or throws an
-	 * {@link IOException} in case document can't be loaded or it is no PDF.
-	 * 
-	 * @param file
-	 * @return
-	 * @throws IOException
-	 */
-	private Integer getPages(final MultipartFile file) throws IOException {
-		final String uri = this.fileUtils.saveFile(file);
-		final Integer result = this.pdfUtils.getPages(uri);
-		this.fileUtils.delete(uri);
 		return result;
 	}
 }

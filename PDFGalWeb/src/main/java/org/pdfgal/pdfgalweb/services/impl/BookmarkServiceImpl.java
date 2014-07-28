@@ -1,6 +1,7 @@
 package org.pdfgal.pdfgalweb.services.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,13 +10,16 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.pdfgal.pdfgal.model.PDFGalBookmark;
+import org.pdfgal.pdfgal.model.vo.PDFGalBookmarkVO;
 import org.pdfgal.pdfgal.pdfgal.PDFGal;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.services.BookmarkService;
 import org.pdfgal.pdfgalweb.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public class BookmarkServiceImpl implements BookmarkService {
 
 	@Autowired
@@ -26,13 +30,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 	@Override
 	public DownloadForm addBookmarks(final MultipartFile file, final String title,
-			final List<PDFGalBookmark> pdfGalBookmarksList, final HttpServletResponse response)
-			throws Exception {
+			final List<Integer> pagesList, final List<String> textsList,
+			final HttpServletResponse response) throws Exception {
 
 		DownloadForm result = new DownloadForm();
 
-		if (file != null && StringUtils.isNotBlank(title)
-				&& CollectionUtils.isNotEmpty(pdfGalBookmarksList) && response != null) {
+		if (file != null && StringUtils.isNotBlank(title) && CollectionUtils.isNotEmpty(pagesList)
+				&& CollectionUtils.isNotEmpty(textsList) && response != null) {
 
 			final String originalName = file.getOriginalFilename();
 			final String inputUri = this.fileUtils.saveFile(file);
@@ -40,6 +44,8 @@ public class BookmarkServiceImpl implements BookmarkService {
 
 			// File is bookmarked
 			try {
+				final List<PDFGalBookmark> pdfGalBookmarksList = createPDFGalBookmarksList(
+						pagesList, textsList);
 				this.pdfGal.addBookmarks(inputUri, outputUri, title, pdfGalBookmarksList);
 			} catch (COSVisitorException | IOException e) {
 				// Temporal files are deleted from system
@@ -57,4 +63,33 @@ public class BookmarkServiceImpl implements BookmarkService {
 		return result;
 	}
 
+	/**
+	 * Creates a {@link PDFGalBookmark} list from a list of pages and texts
+	 * @param pagesList
+	 * @param textsList
+	 * @return
+	 */
+	private List<PDFGalBookmark> createPDFGalBookmarksList(final List<Integer> pagesList,
+			final List<String> textsList) {
+
+		final List<PDFGalBookmark> result = new ArrayList<PDFGalBookmark>();
+
+		if (!(CollectionUtils.isEmpty(pagesList) && CollectionUtils.isEmpty(textsList))) {
+
+			if (CollectionUtils.isEmpty(pagesList) || CollectionUtils.isEmpty(textsList)
+					|| (pagesList.size() != textsList.size())) {
+				throw new IllegalArgumentException("Pages and texts lists' size are different.");
+
+			} else {
+				for (int i = 0; i < pagesList.size(); i++) {
+					final Integer page = pagesList.get(i);
+					final String text = textsList.get(i);
+					final PDFGalBookmark bookmark = new PDFGalBookmarkVO(page, text);
+					result.add(bookmark);
+				}
+			}
+		}
+
+		return result;
+	}
 }

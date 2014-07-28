@@ -25,9 +25,9 @@
 							$('#bookmarksTable')
 									.append(
 											'<tr><td>'
-													+ '   <input type="text" name="bookmarks['+ bookmarkIndex +'].page" class="input_short" placeholder="${labelPage}" />'
+													+ '   <input type="text" name="pagesList['+ bookmarkIndex +']" class="input_short" placeholder="${labelPage}" />'
 													+ '</td> <td>'
-													+ '   <input type="text" name="bookmarks['+ bookmarkIndex +'].text"  class="input" placeholder="${labelText}" />'
+													+ '   <input type="text" name="textsList['+ bookmarkIndex +']"  class="input" placeholder="${labelText}" />'
 													+ '</td> </tr>');
 						});
 	});
@@ -78,13 +78,13 @@
 
 		<table id="bookmarksTable">
 			<tr>
-				<td><input type="text" name="bookmarks[0].page"
+				<td><input type="text" name="pagesList[0]"
 					class="input_short" placeholder="${labelPage}" /></td>
-				<td><input type="text" name="bookmarks[0].text" class="input"
+				<td><input type="text" name="textsList[0]" class="input"
 					placeholder="${labelText}" /></td>
 			</tr>
 		</table>
-		<form:errors path="bookmarks" class="error" />
+		<form:errors path="textsList" class="error" />
 
 		<br /> <br />
 

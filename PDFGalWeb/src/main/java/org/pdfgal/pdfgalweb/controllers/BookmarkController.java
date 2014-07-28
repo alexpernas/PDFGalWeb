@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.pdfgal.pdfgal.model.PDFGalBookmark;
 import org.pdfgal.pdfgalweb.forms.BookmarkForm;
 import org.pdfgal.pdfgalweb.forms.DownloadForm;
 import org.pdfgal.pdfgalweb.services.BookmarkService;
@@ -66,17 +65,18 @@ public class BookmarkController extends BaseController {
 
 		final MultipartFile file = bookmarkForm.getFile();
 		final String title = bookmarkForm.getTitle();
-		final List<PDFGalBookmark> pdfGalBookmarksList = bookmarkForm.getBookmarks();
+		final List<Integer> pagesList = bookmarkForm.getPagesList();
+		final List<String> textsList = bookmarkForm.getTextsList();
 
 		DownloadForm downloadForm = new DownloadForm();
 
 		try {
-			downloadForm = this.bookmarkService.addBookmarks(file, title, pdfGalBookmarksList,
+			downloadForm = this.bookmarkService.addBookmarks(file, title, pagesList, textsList,
 					response);
 		} catch (final Exception e) {
 			// Default error is added
-			result.addError(this.pdfGalWebUtils.createDefaultFieldError(BOOKMARK_FORM, "bookmarks",
-					pdfGalBookmarksList, "protect.validator.error"));
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(BOOKMARK_FORM, "textsList",
+					textsList, "bookmark.validator.error"));
 			return new ModelAndView("bookmark");
 		}
 
