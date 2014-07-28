@@ -55,7 +55,7 @@ public class BookmarkController extends BaseController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final ModelAndView protect(
+	public final ModelAndView bookmark(
 			@ModelAttribute(BOOKMARK_FORM) @Valid final BookmarkForm bookmarkForm,
 			final BindingResult result, final HttpServletResponse response) {
 
@@ -71,12 +71,13 @@ public class BookmarkController extends BaseController {
 		DownloadForm downloadForm = new DownloadForm();
 
 		try {
-			downloadForm = this.bookmarkService.addBookmarks(file, title, pagesList, textsList,
-					response);
+			downloadForm = this.bookmarkService.addBookmarks(file, title,
+					pagesList, textsList, response);
 		} catch (final Exception e) {
 			// Default error is added
-			result.addError(this.pdfGalWebUtils.createDefaultFieldError(BOOKMARK_FORM, "textsList",
-					textsList, "bookmark.validator.error"));
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
+					BOOKMARK_FORM, "textsList", textsList,
+					"bookmark.validator.error"));
 			return new ModelAndView("bookmark");
 		}
 

@@ -47,7 +47,7 @@
 
 <div class="container">
 	<spring:message code="reindex.description"
-		arguments="${labelButtonValue}" />
+		arguments="${labelButtonValue},${labelAddButtonValue}" />
 </div>
 
 <form:form method="POST" commandName="reindexForm"
@@ -87,7 +87,7 @@
 				</select></td>
 			</tr>
 		</table>
-		<form:errors path="numbergingStylesList" class="error" />
+		<form:errors path="numberingStylesList" class="error" />
 
 		<br /> <br />
 

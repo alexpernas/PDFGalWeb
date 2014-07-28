@@ -14,7 +14,7 @@ public class ReindexForm implements Serializable {
 
 	private List<Integer> pagesList;
 
-	private NumberingStyle numberingStylesList;
+	private List<NumberingStyle> numberingStylesList;
 
 	/**
 	 * @return the file
@@ -24,7 +24,8 @@ public class ReindexForm implements Serializable {
 	}
 
 	/**
-	 * @param file the file to set
+	 * @param file
+	 *            the file to set
 	 */
 	public void setFile(final MultipartFile file) {
 		this.file = file;
@@ -38,23 +39,19 @@ public class ReindexForm implements Serializable {
 	}
 
 	/**
-	 * @param pagesList the pagesList to set
+	 * @param pagesList
+	 *            the pagesList to set
 	 */
 	public void setPagesList(final List<Integer> pagesList) {
 		this.pagesList = pagesList;
 	}
 
-	/**
-	 * @return the numbergingStylesList
-	 */
-	public NumberingStyle getNumbergingStylesList() {
+	public List<NumberingStyle> getNumberingStylesList() {
 		return this.numberingStylesList;
 	}
 
-	/**
-	 * @param numbergingStylesList the numberingStylesList to set
-	 */
-	public void setNumbergingStylesList(final NumberingStyle numberingStylesList) {
+	public void setNumberingStylesList(
+			final List<NumberingStyle> numberingStylesList) {
 		this.numberingStylesList = numberingStylesList;
 	}
 
