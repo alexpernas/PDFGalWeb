@@ -41,3 +41,9 @@
 		<spring:message code="menu.bookmark" />
 	</a>
 </div>
+
+<div class="menu_item">
+	<a href="${pageContext.servletContext.contextPath}/reindex.html">
+		<spring:message code="menu.reindex" />
+	</a>
+</div>

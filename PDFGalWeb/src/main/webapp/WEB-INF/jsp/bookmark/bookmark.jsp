@@ -16,7 +16,7 @@
 	// <![CDATA[
 
 	$(function() {
-		//Add more file components if add button is clicked
+		//Add more bookmark components if add button is clicked
 		$('#addBookmark')
 				.click(
 						function() {

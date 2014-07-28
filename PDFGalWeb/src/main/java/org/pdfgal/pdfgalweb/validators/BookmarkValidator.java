@@ -103,7 +103,9 @@ public class BookmarkValidator implements Validator {
 						}
 					}
 				} catch (final IOException e) {
-					errors.rejectValue("textsList", "bookmark.validator.error");
+					if (!errors.hasErrors()) {
+						errors.rejectValue("textsList", "bookmark.validator.error");
+					}
 				}
 			}
 		}

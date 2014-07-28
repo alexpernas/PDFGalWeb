@@ -40,4 +40,9 @@
     <put-attribute name="content" value="/WEB-INF/jsp/bookmark/bookmark.jsp" />
   </definition>
 
+  <definition name="reindex" template="/WEB-INF/jsp/common/template.jsp">
+    <put-attribute name="title" value="reindex.title" />
+    <put-attribute name="content" value="/WEB-INF/jsp/reindex/reindex.jsp" />
+  </definition>
+
 </tiles-definitions>

@@ -54,8 +54,7 @@ public class SplitController extends BaseController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final ModelAndView split(
-			@ModelAttribute(SPLIT_FORM) @Valid final SplitForm splitForm,
+	public final ModelAndView split(@ModelAttribute(SPLIT_FORM) @Valid final SplitForm splitForm,
 			final BindingResult result, final HttpServletResponse response) {
 
 		if (result.hasErrors()) {
@@ -69,12 +68,11 @@ public class SplitController extends BaseController {
 		DownloadForm downloadForm = new DownloadForm();
 
 		try {
-			downloadForm = this.splitService.split(file, splitMode, pages,
-					response);
+			downloadForm = this.splitService.split(file, splitMode, pages, response);
 		} catch (final Exception e) {
 			// Default error is added
-			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
-					SPLIT_FORM, "pages", pages, "split.validator.error"));
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(SPLIT_FORM, "pages", pages,
+					"split.validator.error"));
 			return this.getModelAndView(false);
 		}
 
@@ -86,7 +84,7 @@ public class SplitController extends BaseController {
 
 	/**
 	 * Returns a new {@link ModelAndView} for splitting page, including the
-	 * {@link SplitMode} but not the {@link SplitForm}.
+	 * {@link SplitForm} depending on the argument.
 	 * 
 	 * @param splitForm
 	 * 
