@@ -25,7 +25,7 @@
 											'<tr><td>'
 													+ '   <input type="text" name="pagesList['+ reindexationIndex +']" class="input_short" placeholder="${labelPage}" />'
 													+ '</td> <td>'
-													+ '   <select name="numberingStylesList[0]"> '
+													+ '   <select name="numberingStylesList['+ reindexationIndex +']"> '
 													+ ' <c:forEach var="item" items="${numberingStyles}"> '
 													+ ' <option value="${item}"> '
 													+ ' <spring:message code="${item}" /> '

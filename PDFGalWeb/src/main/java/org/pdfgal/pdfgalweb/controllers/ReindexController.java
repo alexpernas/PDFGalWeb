@@ -66,19 +66,17 @@ public class ReindexController extends BaseController {
 
 		final MultipartFile file = reindexForm.getFile();
 		final List<Integer> pagesList = reindexForm.getPagesList();
-		final List<NumberingStyle> numberingStylesList = reindexForm
-				.getNumbergingStylesList();
+		final List<NumberingStyle> numberingStylesList = reindexForm.getNumberingStylesList();
 
 		DownloadForm downloadForm = new DownloadForm();
 
 		try {
-			downloadForm = this.reindexService.reindex(file, pagesList,
-					numberingStylesList, response);
+			downloadForm = this.reindexService.reindex(file, pagesList, numberingStylesList,
+					response);
 		} catch (final Exception e) {
 			// Default error is added
-			result.addError(this.pdfGalWebUtils.createDefaultFieldError(
-					REINDEX_FORM, "numberingStylesList", numberingStylesList,
-					"reindex.validator.error"));
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(REINDEX_FORM,
+					"numberingStylesList", numberingStylesList, "reindex.validator.error"));
 			return this.getModelAndView(false);
 		}
 

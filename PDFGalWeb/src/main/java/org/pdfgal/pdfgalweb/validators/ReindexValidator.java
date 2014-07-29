@@ -35,8 +35,7 @@ public class ReindexValidator implements Validator {
 
 		// File validation
 		final MultipartFile file = reindexForm.getFile();
-		this.validatorUtils.validateFile(file, errors,
-				PDFEncryptionType.NON_ENCRYPTED);
+		this.validatorUtils.validateFile(file, errors, PDFEncryptionType.NON_ENCRYPTED);
 
 		// Pages validation
 		this.validatePages(file, reindexForm.getPagesList(), errors);
@@ -49,30 +48,27 @@ public class ReindexValidator implements Validator {
 	 * @param pagesList
 	 * @param errors
 	 */
-	private void validatePages(final MultipartFile file,
-			final List<Integer> pagesList, final Errors errors) {
+	private void validatePages(final MultipartFile file, final List<Integer> pagesList,
+			final Errors errors) {
 
 		if (CollectionUtils.isNotEmpty(pagesList)) {
 			try {
 				final Integer totalPages = this.pdfGalWebUtils.getPages(file);
 				Integer previous = null;
 				for (final Integer page : pagesList) {
-					if ((page < 1) || (page > totalPages)
-							|| (previous != null && previous >= page)) {
-						errors.rejectValue("numberingStylesList",
-								"reindex.validator.page");
+					if (page != null
+							&& ((page < 1) || (page > totalPages) || (previous != null && previous >= page))) {
+						errors.rejectValue("numberingStylesList", "reindex.validator.page");
 					}
 					previous = page;
 				}
 			} catch (final IOException e) {
 				if (!errors.hasErrors()) {
-					errors.rejectValue("numberingStylesList",
-							"reindex.validator.error");
+					errors.rejectValue("numberingStylesList", "reindex.validator.error");
 				}
 			}
 		} else {
-			errors.rejectValue("numberingStylesList",
-					"common.validator.required");
+			errors.rejectValue("numberingStylesList", "common.validator.required");
 		}
 	}
 
