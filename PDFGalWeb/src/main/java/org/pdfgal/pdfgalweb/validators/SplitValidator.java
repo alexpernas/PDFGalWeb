@@ -1,3 +1,21 @@
+/*
+ * PDFGalWeb
+ * Copyright (c) 2014, Alejandro Pernas Pan, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
 package org.pdfgal.pdfgalweb.validators;
 
 import org.pdfgal.pdfgalweb.forms.SplitForm;
@@ -32,8 +50,7 @@ public class SplitValidator implements Validator {
 
 		// File validation
 		final MultipartFile file = splitForm.getFile();
-		this.validatorUtils.validateFile(file, errors,
-				PDFEncryptionType.NON_ENCRYPTED);
+		this.validatorUtils.validateFile(file, errors, PDFEncryptionType.NON_ENCRYPTED);
 
 		// SplitMode and pages validation
 		final SplitMode splitMode = splitForm.getSplitMode();
@@ -47,8 +64,7 @@ public class SplitValidator implements Validator {
 		} else if (SplitMode.CONCRETE_PAGES_TO_SPLIT.equals(splitMode)) {
 			// Pages validation when SplitMode refers to the concrete pages to
 			// split the document
-			if (!this.validatorUtils.validateConcretePages(pages, file, ",",
-					null, true)) {
+			if (!this.validatorUtils.validateConcretePages(pages, file, ",", null, true)) {
 				errors.rejectValue("pages", "split.validator.pages.concrete");
 			}
 		}

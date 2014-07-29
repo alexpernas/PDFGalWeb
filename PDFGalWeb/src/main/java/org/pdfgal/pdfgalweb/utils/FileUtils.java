@@ -1,3 +1,21 @@
+/*
+ * PDFGalWeb
+ * Copyright (c) 2014, Alejandro Pernas Pan, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
 package org.pdfgal.pdfgalweb.utils;
 
 import java.io.FileNotFoundException;
@@ -46,36 +64,30 @@ public interface FileUtils {
 	 * Prepares the {@link HttpServletResponse} for downloading the file whose
 	 * URI is the received parameter.
 	 * 
-	 * @param response
-	 *            The HttpServletResponse.
-	 * @param uri
-	 *            The URI of the file to download.
-	 * @param fileName
-	 *            The file name of the file to download.
+	 * @param response The HttpServletResponse.
+	 * @param uri The URI of the file to download.
+	 * @param fileName The file name of the file to download.
 	 * @throws IOException
 	 */
-	void prepareFileDownload(HttpServletResponse response, String uri,
-			String fileName) throws IOException;
+	void prepareFileDownload(HttpServletResponse response, String uri, String fileName)
+			throws IOException;
 
 	/**
 	 * Prepares a new ZIP file.
 	 * 
-	 * @param urisList
-	 *            The URIs of the files to download.
-	 * @param fileName
-	 *            The file name of the files to download.
+	 * @param urisList The URIs of the files to download.
+	 * @param fileName The file name of the files to download.
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	String prepareZipFile(List<String> urisList, String fileName)
-			throws FileNotFoundException, IOException;
+	String prepareZipFile(List<String> urisList, String fileName) throws FileNotFoundException,
+			IOException;
 
 	/**
 	 * Stores the {@link MultipartFile} to the system. Returns the path where
 	 * the file was stored, or null in case it could not be stored.
 	 * 
-	 * @param file
-	 *            File to save.
+	 * @param file File to save.
 	 * @return Path where file was stored, or null in case file could not be
 	 *         stored.
 	 */
@@ -86,8 +98,7 @@ public interface FileUtils {
 	 * paths where the files were stored, or null in case it could not be
 	 * stored.
 	 * 
-	 * @param file
-	 *            File to save.
+	 * @param file File to save.
 	 * @return Path where file was stored, or null in case file could not be
 	 *         stored.
 	 */

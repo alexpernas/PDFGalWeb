@@ -1,3 +1,21 @@
+/*
+ * PDFGalWeb
+ * Copyright (c) 2014, Alejandro Pernas Pan, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
 package org.pdfgal.pdfgalweb.forms;
 
 import java.io.Serializable;
@@ -24,8 +42,7 @@ public class ReindexForm implements Serializable {
 	}
 
 	/**
-	 * @param file
-	 *            the file to set
+	 * @param file the file to set
 	 */
 	public void setFile(final MultipartFile file) {
 		this.file = file;
@@ -39,8 +56,7 @@ public class ReindexForm implements Serializable {
 	}
 
 	/**
-	 * @param pagesList
-	 *            the pagesList to set
+	 * @param pagesList the pagesList to set
 	 */
 	public void setPagesList(final List<Integer> pagesList) {
 		this.pagesList = pagesList;
@@ -50,8 +66,7 @@ public class ReindexForm implements Serializable {
 		return this.numberingStylesList;
 	}
 
-	public void setNumberingStylesList(
-			final List<NumberingStyle> numberingStylesList) {
+	public void setNumberingStylesList(final List<NumberingStyle> numberingStylesList) {
 		this.numberingStylesList = numberingStylesList;
 	}
 

@@ -1,3 +1,21 @@
+/*
+ * PDFGalWeb
+ * Copyright (c) 2014, Alejandro Pernas Pan, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
 package org.pdfgal.pdfgalweb.controllers;
 
 import java.util.ArrayList;
@@ -70,20 +88,18 @@ public class WatermarkController extends BaseController {
 		final String text = watermarkForm.getText();
 		final CustomColor customColor = watermarkForm.getCustomColor();
 		final Float alpha = watermarkForm.getAlpha();
-		final WatermarkPosition watermarkPosition = watermarkForm
-				.getWatermarkPosition();
+		final WatermarkPosition watermarkPosition = watermarkForm.getWatermarkPosition();
 		final String pages = watermarkForm.getPages();
 
 		DownloadForm downloadForm = new DownloadForm();
 
 		try {
-			downloadForm = this.watermarkService.putWatermark(file, text,
-					customColor, alpha, watermarkPosition, pages, response);
+			downloadForm = this.watermarkService.putWatermark(file, text, customColor, alpha,
+					watermarkPosition, pages, response);
 		} catch (final Exception e) {
 			// Default error is added
-			result.addError(this.pdfGalWebUtils
-					.createDefaultFieldError(WATERMARK_FORM, "pages", pages,
-							"watermark.validator.error"));
+			result.addError(this.pdfGalWebUtils.createDefaultFieldError(WATERMARK_FORM, "pages",
+					pages, "watermark.validator.error"));
 			return this.getModelAndView(false);
 		}
 
@@ -96,8 +112,7 @@ public class WatermarkController extends BaseController {
 	/**
 	 * Returns the {@link ModelAndView} for adding watermark.
 	 * 
-	 * @param watermarkForm
-	 *            Indicates if {@link WatermarkForm} must be included.
+	 * @param watermarkForm Indicates if {@link WatermarkForm} must be included.
 	 * 
 	 * @return
 	 */

@@ -1,3 +1,21 @@
+/*
+ * PDFGalWeb
+ * Copyright (c) 2014, Alejandro Pernas Pan, All rights reserved.
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3.0 of the License, or (at your option) any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.
+ */
+
 package org.pdfgal.pdfgalweb.validators;
 
 import java.io.IOException;
@@ -66,11 +84,9 @@ public class MergeValidator implements Validator {
 			// There are more than one file uploaded
 			final PDFEncryptionType validation = this.validatePDF(files);
 			if (PDFEncryptionType.NON_PDF.equals(validation)) {
-				errors.rejectValue("files",
-						"merge.validator.files.incorrect.pdf");
+				errors.rejectValue("files", "merge.validator.files.incorrect.pdf");
 			} else if (PDFEncryptionType.ENCRYPTED.equals(validation)) {
-				errors.rejectValue("files",
-						"merge.validator.files.incorrect.encrypted");
+				errors.rejectValue("files", "merge.validator.files.incorrect.encrypted");
 			}
 		}
 	}
@@ -89,8 +105,7 @@ public class MergeValidator implements Validator {
 			if (!this.zipUtils.isZip(fileInputStream)) {
 				// In case the file is not ZIP we show error, file must be a
 				// ZIP
-				errors.rejectValue("files",
-						"merge.validator.files.incorrect.zip");
+				errors.rejectValue("files", "merge.validator.files.incorrect.zip");
 
 			} else {
 				// If file is ZIP, every file inside must be PDF
@@ -102,13 +117,11 @@ public class MergeValidator implements Validator {
 
 				for (final String uri : urisList) {
 					if (!this.pdfGalValidator.isPDF(uri)) {
-						errors.rejectValue("files",
-								"merge.validator.files.incorrect.zip.pdf");
+						errors.rejectValue("files", "merge.validator.files.incorrect.zip.pdf");
 						break;
 					}
 					if (this.pdfGalValidator.isEncrypted(uri)) {
-						errors.rejectValue("files",
-								"merge.validator.files.incorrect.zip.encrypted");
+						errors.rejectValue("files", "merge.validator.files.incorrect.zip.encrypted");
 						break;
 					}
 				}
@@ -160,8 +173,7 @@ public class MergeValidator implements Validator {
 
 		for (final MultipartFile file : files) {
 			if (file.getSize() > 0) {
-				final PDFEncryptionType validation = this.validatorUtils
-						.validatePDF(file);
+				final PDFEncryptionType validation = this.validatorUtils.validatePDF(file);
 				if (!PDFEncryptionType.NON_ENCRYPTED.equals(validation)) {
 					result = validation;
 					break;
