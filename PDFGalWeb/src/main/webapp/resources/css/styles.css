@@ -7,10 +7,10 @@ body {
 }
 
 #banner {
-	background-color: #AFC8FF;
+	background-color: #0DB7FF;
 	border-style: solid;
 	border-width: 1px;
-	border-color: grey;
+	border-color: #009EE0;
 	border-style: solid;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 #menu {
-	background-color: #AFC8FF;
+	background-color: #0DB7FF;
 	width: 200px;
 	float: left;
 }
@@ -35,7 +35,7 @@ body {
 .menu_item {
 	border-style: solid;
 	border-width: 1px;
-	border-color: grey;
+	border-color: #009EE0;
 }
 
 .menu_item:hover {
@@ -59,15 +59,15 @@ body {
 	border-width: 1px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: grey;
+	border-color: #009EE0;
 }
 
 #footer {
-	background-color: #AFC8FF;
+	background-color: #0DB7FF;
 	text-align: center;
 	border-style: solid;
 	border-width: 1px;
-	border-color: grey;
+	border-color: #009EE0;
 }
 
 .container {
@@ -141,11 +141,11 @@ a:active { /* Active link */
 /* BUTTONS */
 /* ******* */
 .button {
-	background: #AFC8FF;
+	background: #0DB7FF;
 	text-align: center;
 	border-style: solid;
 	border-width: 1px;
-	border-color: grey;
+	border-color: #009EE0;
 	font-weight: bold;
 	height: 23px;
 }
