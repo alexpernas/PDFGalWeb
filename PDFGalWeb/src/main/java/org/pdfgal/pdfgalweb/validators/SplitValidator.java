@@ -50,7 +50,8 @@ public class SplitValidator implements Validator {
 
 		// File validation
 		final MultipartFile file = splitForm.getFile();
-		this.validatorUtils.validateFile(file, errors, PDFEncryptionType.NON_ENCRYPTED);
+		this.validatorUtils.validateFile(file, errors,
+				PDFEncryptionType.NON_ENCRYPTED);
 
 		// SplitMode and pages validation
 		final SplitMode splitMode = splitForm.getSplitMode();
@@ -64,7 +65,8 @@ public class SplitValidator implements Validator {
 		} else if (SplitMode.CONCRETE_PAGES_TO_SPLIT.equals(splitMode)) {
 			// Pages validation when SplitMode refers to the concrete pages to
 			// split the document
-			if (!this.validatorUtils.validateConcretePages(pages, file, ",", null, true)) {
+			if (!this.validatorUtils.validateConcretePages(pages, file, ",",
+					null, true, true)) {
 				errors.rejectValue("pages", "split.validator.pages.concrete");
 			}
 		}

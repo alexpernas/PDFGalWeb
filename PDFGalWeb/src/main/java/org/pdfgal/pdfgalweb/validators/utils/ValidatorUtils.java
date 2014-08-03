@@ -64,7 +64,8 @@ public interface ValidatorUtils {
 	 * @param errors
 	 * @param pdfEncryptionType
 	 */
-	public void validateFile(MultipartFile file, Errors errors, PDFEncryptionType pdfEncryptionType);
+	public void validateFile(MultipartFile file, Errors errors,
+			PDFEncryptionType pdfEncryptionType);
 
 	/**
 	 * Validates if argument is a string of incremented {@link Integer}
@@ -72,12 +73,19 @@ public interface ValidatorUtils {
 	 * 
 	 * @param pages
 	 * @param file
-	 * @param delim1 First delimiter for tokens.
-	 * @param delim2 Second delimiter for tokens.
-	 * @param testMoreThanOne It is tested that pages are more than 1.
+	 * @param delim1
+	 *            First delimiter for tokens.
+	 * @param delim2
+	 *            Second delimiter for tokens.
+	 * @param testMoreThanOne
+	 *            It is tested that pages are more than 1.
+	 * @param notBlankPages
+	 *            True: Argument pages cannot be blank. False: Argument pages
+	 *            can be blank.
 	 * @return
 	 */
-	boolean validateConcretePages(String pages, MultipartFile file, String delim1, String delim2,
-			boolean testMoreThanOne);
+	boolean validateConcretePages(String pages, MultipartFile file,
+			String delim1, String delim2, boolean testMoreThanOne,
+			boolean notBlankPages);
 
 }
